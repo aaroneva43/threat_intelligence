@@ -23,7 +23,7 @@ module.exports = (env = {}) => {
             filename: '[name].bundle.js'
         },
         //watch: true,
-        devtool: env.prod ? 'cheap-eval-source-map' : 'source-map',
+        devtool: env.prod ? '' : 'source-map',
         devServer: {
             contentBase: BUILD_DIR,
             // host: "0.0.0.0",
@@ -116,6 +116,11 @@ module.exports = (env = {}) => {
             ],
                 { copyUnmodified: false }
             )
-        ].concat(env.prod ? new webpack.optimize.UglifyJsPlugin({ sourceMap: true }) : [])
+        ].concat(env.prod ? new webpack.optimize.UglifyJsPlugin({ sourceMap: true }) : []).
+            concat(env.prod ? new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': '"production"'
+                }
+            }) : [])
     }
 };
