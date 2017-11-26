@@ -47,7 +47,7 @@
         "react-ladda": "5.0.7",
         "react-redux": "^5.0.6",
         "react-router-dom": "4.2.2",
-        "react-router-redux": "^4.0.8",
+        "react-router-redux": "^5.0.0-alpha.6",
         "react-select": "^1.0.0-rc.1",
         "react-table": "^6.6.0",
         "react-text-mask": "4.1.0",

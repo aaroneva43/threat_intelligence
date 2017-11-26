@@ -64,7 +64,7 @@ module.exports = (env = {}) => {
                         use: [
                             {
                                 loader: 'css-loader',
-                                options: { alias: { '../img': '../public/img' } }
+                                options: { alias: { '../img': '../public/img' }, module: true }
                             },
                             {
                                 loader: 'sass-loader'
