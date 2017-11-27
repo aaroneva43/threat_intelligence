@@ -48,7 +48,7 @@ module.exports = (env = {}) => {
                         loader: 'babel-loader',
                         options: {
                             cacheDirectory: true,
-                            presets: ['react', 'env'],
+                            // presets: ['react', 'env'],
                             plugins: ["transform-decorators-legacy", "transform-object-rest-spread"]
                         }
                     }
