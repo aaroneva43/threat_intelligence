@@ -80,7 +80,7 @@ class Login extends Component {
                 <Card style={styles.card} >
                     <div style={styles.avatar}>
                         <span style={{ fontWeight: 'bold', color: '#555', fontSize: 20 }}>Threat</span>
-                        <span style={{ fontWeight: 'bold', color: 'darkgreen', fontSize: 20 }}>Intelligence </span>
+                        <span style={{ fontWeight: 'bold', color: 'darkgreen', fontSize: 20 }}>Modeling </span>
                         <span style={{ fontWeight: 'normal', color: '#333', fontSize: 14 }}>v0.0.1 </span>
                     </div>
                     <form onSubmit={handleSubmit(this.submit)}>

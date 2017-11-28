@@ -1,7 +1,7 @@
 import { PENDING, SUCCESS, FAILURE, LOGIN, AUTH } from '../actions/actionTypes'
 import reducerGenerator from './reducerGenerator'
 
-const initialState = { pending: true, success: false, token: null, authed: false }
+const initialState = { pending: false, success: false, token: null, authed: false }
 
 const auth = reducerGenerator([LOGIN, AUTH], initialState, {
     [`${AUTH}`]: (state, action) => {
