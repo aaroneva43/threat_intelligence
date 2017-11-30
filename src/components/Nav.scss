@@ -1,0 +1,31 @@
+.Nav {
+    background-color: #656565;
+    color: #fff;
+}
+
+.Nav li a {
+    color: #dedede !important;
+}
+
+.Nav li.ant-menu-submenu-active {
+    color: #fff !important;
+}
+
+
+
+
+.menuL1 {
+        border-bottom-color: transparent !important;
+        min-width: 160px;
+    
+}
+
+.menuL1 >ul {
+    background-color: #656565 !important;
+    color: #fff;
+}
+
+.menuL1 li.ant-menu-item-selected  {
+    background-color: #656565 !important;
+}
+

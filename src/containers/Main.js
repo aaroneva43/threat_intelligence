@@ -3,13 +3,25 @@ import css from './Main.scss'
 import { connect } from 'react-redux';
 
 import Login from './Login'
+import Nav from '../components/Nav'
 
 class Main extends Component {
+    componentWillReceiveProps(nextProps) {
+
+        const { auth, menu, dispatch } = nextProps
+
+        const isAuthed = auth.authed && !auth.pending
+
+        if (isAuthed && _.isEmpty(menu)) {
+            // in formal code, u should dispatch this action & use saga to handle async request
+            // dispatch({ type: 'GET_MENU' })
+        }
+    }
 
     render() {
-        const { auth } = this.props
+        const { location, auth, menu } = this.props
         return (
-            <div >
+            <div>
                 {
                     (!auth.pending && !auth.authed) &&
                     <Login />
@@ -19,7 +31,10 @@ class Main extends Component {
                 {
                     (!auth.pending && auth.authed) &&
                     <div>
-                        Main
+                        <Nav
+                            location={location}
+                            menuData={menu}
+                        />
                     </div>
                 }
 
@@ -30,4 +45,4 @@ class Main extends Component {
 }
 
 
-export default connect(state => ({ auth: _.get(state, 'auth', false) }))(Main)
+export default connect(state => ({ auth: _.get(state, 'auth', false), menu: _.get(state, 'menu', []) }))(Main)

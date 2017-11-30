@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
-import { propTypes as reduxFormPropTypes, reduxForm, Field } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-
-
 import compose from 'recompose/compose'
-
 import { Card, Button, Form } from 'antd'
-
-
-
 import _ from 'lodash'
 
 import style from './Login.scss'
@@ -35,10 +29,6 @@ const styles = {
         minWidth: 600,
         border: 0
     },
-    avatar: {
-        margin: '2em 1em',
-        textAlign: 'left ',
-    },
     form: {
         padding: '0 1em 1em 1em',
         display: 'flex',
@@ -60,9 +50,7 @@ const styles = {
 
 class Login extends Component {
 
-    static PropTypes = {
-        ...reduxFormPropTypes,
-        theme: PropTypes.object.isRequired,
+    static propTypes = {
         login: PropTypes.func.isRequired,
         auth: PropTypes.object.isRequired
     }
@@ -73,12 +61,12 @@ class Login extends Component {
     }
 
     render() {
-        const { handleSubmit, submitting, theme, translate } = this.props;
+        const { handleSubmit, auth } = this.props;
 
         return (
             <div style={{ ...styles.main, backgroundColor: "#fff" }}>
                 <Card style={styles.card} >
-                    <div style={styles.avatar}>
+                    <div style={{ margin: '2em 1em' }}>
                         <span style={{ fontWeight: 'bold', color: '#555', fontSize: 20 }}>Threat</span>
                         <span style={{ fontWeight: 'bold', color: 'darkgreen', fontSize: 20 }}>Modeling </span>
                         <span style={{ fontWeight: 'normal', color: '#333', fontSize: 14 }}>v0.0.1 </span>
@@ -102,7 +90,7 @@ class Login extends Component {
                                 />
                             </div>
 
-                            <Button style={styles.button} htmlType="submit" disabled={submitting} children={'Sign In'} />
+                            <Button style={styles.button} htmlType="submit" disabled={auth.pending} children={'Sign In'} />
                         </div>
 
                     </form>
@@ -128,7 +116,7 @@ const enhance = compose(
     // connect to store
     connect(
         (state) => ({
-            submitting: _.get(state, 'auth.pending', false)
+            auth: _.get(state, 'auth', false)
         })
         , { login: login })
 )

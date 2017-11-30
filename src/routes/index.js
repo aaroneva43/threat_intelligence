@@ -5,8 +5,7 @@ import Main from '../containers/Main'
 export default (
     <div>
         <Switch>
-            {
-                /* <Redirect from="/" to="/login" render={({ location }) => { return createElement(Login, { location }) }} /> */}
+            <Redirect from="/" exact to="/system/settings/basic" render={({ location }) => { return createElement(Main, { location }) }} />
 
             <Route path="/" render={({ location }) => { return createElement(Main, { location }) }} ></Route>
 
