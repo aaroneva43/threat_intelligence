@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 
 import style from './Nav.scss'
 
-
 import _ from 'lodash'
 
 const SubMenu = Menu.SubMenu
@@ -142,26 +141,26 @@ class Nav extends React.PureComponent {
             return (
                 <div >
                     {
-                        menu.depth === 0 &&
-                        <Menu mode="horizontal" className={style.Nav}>
-                            <SubMenu className={style.menuL1} title={<span><Icon type="setting" />{menu.selectedChildText}</span>} >
 
-                                {
-
-                                    (menu.children || []).map((itm) => {
-                                        return <Menu.Item
-                                            key={itm.name}
-                                            className={itm.url == location.pathname ? 'ant-menu-item-selected ant-menu-item' : ''}
-                                        >
-                                            <Link to={itm.url}>{itm.text}</Link>
-                                        </Menu.Item>
-                                    })
-
-
-                                }
-
-                            </SubMenu>
+                        <Menu mode="horizontal" className={menu.depth == 0 && 'Nav'}>
                             {
+
+                                (menu.children || []).map((itm) => {
+                                    return (
+
+                                        <Menu.Item
+                                            className={itm.url == location.pathname ? (menu.depth == 0 ? 'menuSelected' : 'ant-menu-item-selected') : ''}
+                                            key={itm.name}
+                                        >
+
+                                            <Link to={itm.url}><span className={menu.depth == 0 ? 'icon_' + itm.name : 'xhidden'}></span>{itm.text}</Link>
+                                        </Menu.Item>
+                                    )
+                                })
+
+
+                            }
+                            {/* {
                                 _.get((menu.children || []).find(itm => itm.name === menu.selectedChild), 'children', []).map((itm) => {
                                     return <Menu.Item
                                         className={itm.url == location.pathname ? 'ant-menu-item-selected ant-menu-item' : ''}
@@ -172,13 +171,13 @@ class Nav extends React.PureComponent {
                                 })
 
 
-                            }
+                            } */}
 
 
                         </Menu>
                     }
 
-                    {
+                    {/* {
                         menu.depth > 1 && menu.children &&
                         < Menu mode="horizontal" style={{ height: 32 }}>
                             {
@@ -196,7 +195,7 @@ class Nav extends React.PureComponent {
 
                             }
                         </Menu>
-                    }
+                    } */}
 
                     {renderMenu((menu.children || []).find(itm => itm.name === menu.selectedChild))}
 

@@ -1,31 +1,59 @@
 .Nav {
-    background-color: #656565;
-    color: #fff;
+    background-color: #555 !important;
 }
 
-.Nav li a {
-    color: #dedede !important;
+.Nav li.ant-menu-item {
+    padding: 0px 80px !important;
+    border-bottom: none !important;
+    // margin:0px !important;
+    top:0px !important;
+    bottom:0px !important;
 }
 
-.Nav li.ant-menu-submenu-active {
+.Nav > li a:hover {
+    color: #fff !important;
+}
+
+.Nav .menuSelected {
+    background-color: #222;
+    
+}
+
+.Nav .menuSelected a {
     color: #fff !important;
 }
 
 
-
-
-.menuL1 {
-        border-bottom-color: transparent !important;
-        min-width: 160px;
-    
+.Nav .menuSelected:hover {
+    background-color: #222;
+    color: #fff !important;
 }
 
-.menuL1 >ul {
-    background-color: #656565 !important;
-    color: #fff;
+.Nav li a {
+    color: #cdcdcd !important;
 }
 
-.menuL1 li.ant-menu-item-selected  {
-    background-color: #656565 !important;
-}
+.xhidden {display: none;}
 
+
+.Nav span {
+    margin: auto 12px -2px auto;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+.Nav .icon_dashboard {
+    background-image: url(../../public/img/icons/icon_dashboard.svg);
+}
+.Nav .icon_assets {
+    background-image: url(../../public/img/icons/icon_assets.svg);
+}
+.Nav .icon_discovery {
+    background-image: url(../../public/img/icons/icon_discovery.svg);
+}
+.Nav .icon_reports {
+    background-image: url(../../public/img/icons/icon_reports.svg);
+}
+.Nav .icon_configuration {
+    background-image: url(../../public/img/icons/icon_configuration.svg);
+}

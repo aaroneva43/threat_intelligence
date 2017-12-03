@@ -3,50 +3,40 @@ import reducerGenerator from './reducerGenerator'
 
 const initialState = [
     {
-        name: 'status',
-        text: 'Dashboard',
-        icon: 'status',
+        name: 'dashboard',
+        text: '首页',
+        icon: 'dashboard'
+    }, {
+        name: 'assets',
+        text: '资产',
+        icon: 'assets',
         children: [
             {
-                name: 'status',
-                text: 'Dashboard'
-            }
-        ]
-    },
-
-    {
-        name: 'system',
-        text: 'System',
-        icon: 'system',
-        children: [
-            {
-                name: 'settings',
-                text: 'Settings',
-                modules: [
-                    {
-                        name: 'basic',
-                        text: 'Basic',
-                        gid: '732'
-                    },
-                    {
-                        name: 'maintenance',
-                        text: 'Maintenance',
-                        widget: 'SystemSettingsMaintenance'
-                    },
-                ]
+                name: 'host',
+                text: '主机'
             },
-
             {
-                name: 'administrator',
-                text: 'Administrator',
-                modules: [
-                    {
-                        name: 'admin',
-                        text: 'Admin'
-                    }
-                ]
+                name: 'app',
+                text: '应用'
+            },
+            {
+                name: 'topo',
+                text: '拓扑'
+            },
+            {
+                name: 'leak',
+                text: '漏洞'
             }
         ]
+    }, {
+        name: 'discovery',
+        text: '发现'
+    }, {
+        name: 'reports',
+        text: '报表'
+    }, {
+        name: 'configration',
+        text: '配置'
     }]
 
 const menu = reducerGenerator([GET_MENU], initialState, {

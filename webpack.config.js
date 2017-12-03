@@ -1,31 +1,53 @@
 const webpack = require('webpack');
 const path = require('path');
+const fs = require('fs');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const extractCSS = new ExtractTextPlugin('[name].fonts.css');
 const extractSCSS = new ExtractTextPlugin('[name].styles.css');
+const extractLess = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 const SRC_DIR = path.resolve(__dirname, 'src');
 
-console.log('BUILD_DIR', BUILD_DIR);
-console.log('SRC_DIR', SRC_DIR);
-
 module.exports = (env = {}) => {
+
+    const pkgPath = path.resolve(__dirname, 'package.json');
+    const pkg = fs.existsSync(pkgPath) ? require(pkgPath) : {};
+
+
+    let theme = {};
+    if (pkg.theme && typeof (pkg.theme) === 'string') {
+        let cfgPath = pkg.theme;
+        // relative path
+        if (cfgPath.charAt(0) === '.') {
+            cfgPath = path.resolve(__dirname, cfgPath);
+        }
+        const getThemeConfig = require(cfgPath);
+        theme = getThemeConfig();
+    } else if (pkg.theme && typeof (pkg.theme) === 'object') {
+        theme = pkg.theme;
+    }
+
     return {
         entry: {
             index: [SRC_DIR + '/index.js']
         },
         output: {
             path: BUILD_DIR,
-            filename: '[name].bundle.js'
+            filename: '[name].bundle.js',
+            publicPath: '/'
         },
         //watch: true,
         devtool: env.prod ? '' : 'source-map',
         devServer: {
             contentBase: BUILD_DIR,
+            historyApiFallback: true,
             // host: "0.0.0.0",
             port: 5000,
             compress: true,
@@ -64,7 +86,7 @@ module.exports = (env = {}) => {
                         use: [
                             {
                                 loader: 'css-loader',
-                                options: { alias: { '../img': '../public/img' }, module: true }
+                                options: { alias: { '../img': '../public/img' }, module: false }
                             },
                             {
                                 loader: 'sass-loader'
@@ -77,6 +99,21 @@ module.exports = (env = {}) => {
                     use: extractCSS.extract({
                         fallback: 'style-loader',
                         use: 'css-loader'
+                    })
+                },
+                {
+                    test: /\.less$/,
+                    use: extractLess.extract({
+                        use: [
+                            {
+                                loader: "css-loader"
+                            },
+                            {
+                                loader: "less-loader",
+                                options: { modifyVars: theme } // no need to JSON.stringify()
+                            }
+                        ],
+                        fallback: "style-loader"
                     })
                 },
                 {
