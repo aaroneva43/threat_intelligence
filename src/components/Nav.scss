@@ -1,59 +1,83 @@
-.Nav {
-    background-color: #555 !important;
+.nav {
+    background-color: #eee !important;
+    height: 50px;
+    
 }
 
-.Nav li.ant-menu-item {
-    padding: 0px 80px !important;
+.nav li.ant-menu-item {
+    height: 50px;
+    padding: 0px 85px !important;
+    min-width: 215px;
     border-bottom: none !important;
-    // margin:0px !important;
+    margin:0px !important;
     top:0px !important;
     bottom:0px !important;
 }
 
-.Nav > li a:hover {
-    color: #fff !important;
+.nav > li a:hover {
+    color: #666 !important;
 }
 
-.Nav .menuSelected {
-    background-color: #222;
+.nav .menuSelected {
+    background-color: #666;
     
 }
 
-.Nav .menuSelected a {
+.nav .menuSelected a {
     color: #fff !important;
 }
 
 
-.Nav .menuSelected:hover {
+.nav .menuSelected:hover {
     background-color: #222;
     color: #fff !important;
 }
 
-.Nav li a {
+.nav li a {
     color: #cdcdcd !important;
 }
 
 .xhidden {display: none;}
 
 
-.Nav span {
+.nav span {
     margin: auto 12px -2px auto;
     width: 16px;
     height: 16px;
     display: inline-block;
 }
-.Nav .icon_dashboard {
+.nav .icon_dashboard {
     background-image: url(../../public/img/icons/icon_dashboard.svg);
 }
-.Nav .icon_assets {
+.nav .icon_assets {
     background-image: url(../../public/img/icons/icon_assets.svg);
 }
-.Nav .icon_discovery {
+.nav .icon_discovery {
     background-image: url(../../public/img/icons/icon_discovery.svg);
 }
-.Nav .icon_reports {
+.nav .icon_reports {
     background-image: url(../../public/img/icons/icon_reports.svg);
 }
-.Nav .icon_configuration {
+.nav .icon_configuration {
     background-image: url(../../public/img/icons/icon_configuration.svg);
+}
+
+.navsub {
+    height: 40px;
+}
+
+.navsub li.ant-menu-item {
+    height: 40px;
+}
+
+.navbanner {
+    height: 35px;
+    background-color: #222;
+    padding: 0 142px;
+    .banner {
+        color: #efefef;
+        font-family: arial;
+        font-size: 22px;
+
+    }
 }

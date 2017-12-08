@@ -135,14 +135,14 @@ class Nav extends React.PureComponent {
 
         const renderMenu = (menu) => {
 
-            if (!menu) return
+            if (!menu || _.isEmpty(menu.children)) return
 
 
             return (
                 <div >
                     {
 
-                        <Menu mode="horizontal" className={menu.depth == 0 && 'Nav'}>
+                        <Menu mode="horizontal" className={menu.depth == 0 ? 'nav' : 'navsub'} style={{ padding: '0 142px' }}>
                             {
 
                                 (menu.children || []).map((itm) => {
@@ -160,42 +160,11 @@ class Nav extends React.PureComponent {
 
 
                             }
-                            {/* {
-                                _.get((menu.children || []).find(itm => itm.name === menu.selectedChild), 'children', []).map((itm) => {
-                                    return <Menu.Item
-                                        className={itm.url == location.pathname ? 'ant-menu-item-selected ant-menu-item' : ''}
-                                        key={itm.name}
-                                    >
-                                        <Link to={itm.url}>{itm.text}</Link>
-                                    </Menu.Item>
-                                })
-
-
-                            } */}
-
 
                         </Menu>
                     }
 
-                    {/* {
-                        menu.depth > 1 && menu.children &&
-                        < Menu mode="horizontal" style={{ height: 32 }}>
-                            {
 
-                                (menu.children || []).map((itm) => {
-                                    return <Menu.Item
-                                        style={{ height: 32, lineHeight: '32px' }}
-                                        key={itm.name}
-                                        className={itm.url == location.pathname ? 'ant-menu-item-selected ant-menu-item' : ''}
-                                    >
-                                        <Link to={itm.url}>{itm.text}</Link>
-                                    </Menu.Item>
-                                })
-
-
-                            }
-                        </Menu>
-                    } */}
 
                     {renderMenu((menu.children || []).find(itm => itm.name === menu.selectedChild))}
 
@@ -207,7 +176,12 @@ class Nav extends React.PureComponent {
         }
 
 
-        return _.isArray(menuData) && menuData.length ? renderMenu(menu) : ''
+        return (
+            <div id='navigator'>
+                <div className='navbanner'><a href='javascript:;' className='banner'>Threat Intelligence</a></div>
+                {_.isArray(menuData) && menuData.length ? renderMenu(menu) : ''}
+            </div>
+        )
     }
 
 }

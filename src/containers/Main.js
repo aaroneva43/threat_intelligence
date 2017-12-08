@@ -1,9 +1,12 @@
 import React, { Component, createElement } from 'react'
 import css from './Main.scss'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import { Route } from 'react-router'
 
 import Login from './Login'
 import Nav from '../components/Nav'
+
+import Dashboard from './Dashboard'
 
 class Main extends Component {
     componentWillReceiveProps(nextProps) {
@@ -20,27 +23,23 @@ class Main extends Component {
 
     render() {
         const { location, auth, menu } = this.props
-        return (
-            <div>
-                {
-                    (!auth.pending && !auth.authed) &&
-                    <Login />
 
+        if (!auth.pending && !auth.authed) {
+            return <Login />
 
-                }
-                {
-                    (!auth.pending && auth.authed) &&
-                    <div>
-                        <Nav
-                            location={location}
-                            menuData={menu}
-                        />
-                    </div>
-                }
-
+        } else if (!auth.pending && auth.authed) {
+            return <div className='main'>
+                <Nav
+                    location={location}
+                    menuData={menu}
+                />
+                <div className='content'>
+                    <Route path="/dashboard" exact render={({ location }) => { return createElement(Dashboard) }} />
+                </div>
             </div>
 
-        )
+        }
+
     }
 }
 

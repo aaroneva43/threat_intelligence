@@ -35,7 +35,7 @@ const initialState = [
         name: 'reports',
         text: '报表'
     }, {
-        name: 'configration',
+        name: 'configuration',
         text: '配置'
     }]
 
