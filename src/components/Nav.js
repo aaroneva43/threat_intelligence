@@ -123,8 +123,6 @@ class Nav extends React.PureComponent {
     }
 
 
-
-
     render() {
 
         const me = this
@@ -135,36 +133,57 @@ class Nav extends React.PureComponent {
 
         const renderMenu = (menu) => {
 
-            if (!menu || _.isEmpty(menu.children)) return
+            if (!menu) return
 
 
             return (
                 <div >
                     {
+                        menu.depth === 0 &&
+                        <Menu mode="horizontal" className={'nav'}>
+                            <SubMenu className={style.menuL1} title={<span><Icon type="setting" />{menu.selectedChildText}</span>} >
 
-                        <Menu mode="horizontal" className={menu.depth == 0 ? 'nav' : 'navsub'} style={{ padding: '0 142px' }}>
-                            {
+                                {
 
-                                (menu.children || []).map((itm) => {
-                                    return (
-
-                                        <Menu.Item
-                                            className={itm.url == location.pathname ? (menu.depth == 0 ? 'menuSelected' : 'ant-menu-item-selected') : ''}
+                                    (menu.children || []).map((itm) => {
+                                        return <Menu.Item
                                             key={itm.name}
+                                            className={itm.url == location.pathname ? 'ant-menu-item-selected ant-menu-item' : ''}
                                         >
-
-                                            <Link to={itm.url}><span className={menu.depth == 0 ? 'icon_' + itm.name : 'xhidden'}></span>{itm.text}</Link>
+                                            <span className={'icon_' + itm.name} />
+                                            <Link style={{display: 'inline-block'}} to={itm.url}>{itm.text}</Link>
                                         </Menu.Item>
-                                    )
-                                })
+                                    })
 
 
-                            }
+                                }
+
+                            </SubMenu>
+
+
 
                         </Menu>
                     }
 
+                    {
+                        menu.depth >= 1 && menu.children &&
+                        < Menu mode="horizontal" className={'navsub'} style={{ height: 32 }}>
+                            {
 
+                                (menu.children || []).map((itm) => {
+                                    return <Menu.Item
+                                        style={{ height: 32, lineHeight: '32px' }}
+                                        key={itm.name}
+                                        className={itm.url == location.pathname ? 'ant-menu-item-selected ant-menu-item' : ''}
+                                    >
+                                        <Link to={itm.url}>{itm.text}</Link>
+                                    </Menu.Item>
+                                })
+
+
+                            }
+                        </Menu>
+                    }
 
                     {renderMenu((menu.children || []).find(itm => itm.name === menu.selectedChild))}
 
@@ -176,13 +195,9 @@ class Nav extends React.PureComponent {
         }
 
 
-        return (
-            <div id='navigator'>
-                <div className='navbanner'><a href='javascript:;' className='banner'>Threat Intelligence</a></div>
-                {_.isArray(menuData) && menuData.length ? renderMenu(menu) : ''}
-            </div>
-        )
+        return _.isArray(menuData) && menuData.length ? renderMenu(menu) : ''
     }
+
 
 }
 

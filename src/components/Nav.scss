@@ -1,25 +1,33 @@
 .nav {
-    background-color: #eee !important;
+    background-color: forestgreen !important;
     height: 50px;
+    padding: 0px 20px !important;
     
 }
 
-.nav li.ant-menu-item {
+.nav li.ant-menu-item, .ant-menu-submenu {
     height: 50px;
-    padding: 0px 85px !important;
-    min-width: 215px;
+    padding: 0px 22px !important;
     border-bottom: none !important;
     margin:0px !important;
     top:0px !important;
     bottom:0px !important;
 }
 
-.nav > li a:hover {
-    color: #666 !important;
+.nav li.ant-menu-item, .ant-menu-submenu .ant-menu-submenu-title span {
+    color : #fff;
 }
 
+.nav li.ant-menu-item, .ant-menu-submenu .ant-menu-sub .ant-menu-item a {
+    color : #333 !important;
+    :hover {
+        color: #111 !important;
+    }
+}
+
+
 .nav .menuSelected {
-    background-color: #666;
+    background-color: #fff;
     
 }
 
@@ -29,12 +37,12 @@
 
 
 .nav .menuSelected:hover {
-    background-color: #222;
+    background-color: #fff;
     color: #fff !important;
 }
 
 .nav li a {
-    color: #cdcdcd !important;
+    color: #eee !important;
 }
 
 .xhidden {display: none;}
@@ -64,6 +72,7 @@
 
 .navsub {
     height: 40px;
+    padding: 0px 20px;
 }
 
 .navsub li.ant-menu-item {
