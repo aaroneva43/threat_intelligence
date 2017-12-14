@@ -70,23 +70,29 @@
     background-image: url(../../public/img/icons/icon_configuration.svg);
 }
 
-.navsub {
-    height: 40px;
-    padding: 0px 20px;
+// .navsub {
+//     height: 40px;
+//     padding: 0px 20px;
+// }
+
+// .navsub li.ant-menu-item {
+//     height: 40px;
+// }
+
+.submenu_profile {
+    position: absolute !important;
+    right: 300px !important;
+    font-size: 16px;
 }
 
-.navsub li.ant-menu-item {
-    height: 40px;
-}
+.banner {
+    float: right;
+    width: 200px;
+    height: 48px;
+    background: transparent;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: arial;
+    color: #fff !important;
 
-.navbanner {
-    height: 35px;
-    background-color: #222;
-    padding: 0 142px;
-    .banner {
-        color: #efefef;
-        font-family: arial;
-        font-size: 22px;
-
-    }
 }

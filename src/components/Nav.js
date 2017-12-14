@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 
 import PropTypes from 'prop-types'
 
-import { Menu, Icon } from 'antd'
+import { Menu, Icon, Affix } from 'antd'
 import { Link } from 'react-router-dom'
 
 import style from './Nav.scss'
@@ -151,7 +151,7 @@ class Nav extends React.PureComponent {
                                             className={itm.url == location.pathname ? 'ant-menu-item-selected ant-menu-item' : ''}
                                         >
                                             <span className={'icon_' + itm.name} />
-                                            <Link style={{display: 'inline-block'}} to={itm.url}>{itm.text}</Link>
+                                            <Link style={{ display: 'inline-block' }} to={itm.url}>{itm.text}</Link>
                                         </Menu.Item>
                                     })
 
@@ -160,7 +160,16 @@ class Nav extends React.PureComponent {
 
                             </SubMenu>
 
+                            <SubMenu className='submenu_profile' title={<span><Icon type="user" /> <span>admin</span></span>} >
 
+                                <Menu.Item key='logout' >
+                                    <Icon type='logout' />
+                                    <Link style={{ display: 'inline-block' }} to={'/'}>{'logout'}</Link>
+                                </Menu.Item>
+
+                            </SubMenu>
+
+                            <Affix className='banner' style={{ position: 'absolute', right: '20px' }}>Threat Modeling</Affix>
 
                         </Menu>
                     }
