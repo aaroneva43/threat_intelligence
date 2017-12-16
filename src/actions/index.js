@@ -1,4 +1,4 @@
-import { LOGIN, SUCCESS } from './actionTypes'
+import { LOGIN, SUCCESS, FAILURE } from './actionTypes'
 import cookie from 'js-cookie'
 
 export const login = (payload) => {
@@ -10,3 +10,13 @@ export const login = (payload) => {
             payload
         }
 }
+
+export const logout = (payload) => {
+    
+        // use saga to handle real logout action
+        return {
+            type: `${LOGIN}/${FAILURE}`,
+            payload
+        }
+            
+    }

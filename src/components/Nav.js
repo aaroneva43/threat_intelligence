@@ -9,6 +9,8 @@ import style from './Nav.scss'
 
 import _ from 'lodash'
 
+import { logout } from '../actions'
+
 const SubMenu = Menu.SubMenu
 
 class Nav extends React.PureComponent {
@@ -127,7 +129,7 @@ class Nav extends React.PureComponent {
 
         const me = this
 
-        const { location, menuData } = this.props
+        const { location, menuData, dispatch } = this.props
 
         const menu = me.decorateMenuData(menuData, location.pathname)
 
@@ -164,7 +166,7 @@ class Nav extends React.PureComponent {
 
                                 <Menu.Item key='logout' >
                                     <Icon type='logout' />
-                                    <Link style={{ display: 'inline-block' }} to={'/'}>{'logout'}</Link>
+                                    <Link style={{ display: 'inline-block' }} to='/' onClick={() => { dispatch(logout()) }}>{'logout'}</Link>
                                 </Menu.Item>
 
                             </SubMenu>
