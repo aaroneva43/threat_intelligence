@@ -7,6 +7,7 @@ import Login from './Login'
 import Nav from '../components/Nav'
 
 import Dashboard from './Dashboard'
+import Host from './Host'
 
 class Main extends Component {
     componentWillReceiveProps(nextProps) {
@@ -35,6 +36,7 @@ class Main extends Component {
                 />
                 <div className='content'>
                     <Route path="/dashboard" exact render={({ location }) => { return createElement(Dashboard) }} />
+                    <Route path="/assets/host" exact render={({ location }) => { return createElement(Host) }}/>
                 </div>
             </div>
 
