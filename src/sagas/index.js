@@ -10,9 +10,9 @@ function* getConfig(action) {
     try {
         const data = yield call(API.getConfig, action.payload)
 
-        yield put({ type: actions.GET_CONFIG + '/SUCCESS', data: data.result })
+        yield put({ type: `${actions.GET_CONFIG}/${actions.SUCCESS}`, payload: _.extend(action.payload, { data: data }) })
     } catch (e) {
-        yield put({ type: actions.GET_CONFIG + '/FAIL', message: e.message })
+        yield put({ type: `${actions.GET_CONFIG}/${actions.FAILURE}`, payload: { message: e.message } })
     }
 }
 
@@ -23,7 +23,7 @@ export default function* sagas() {
     // AUTH
 
     // CONFIG
-    yield takeEvery("GET_CONFIG", getConfig)
+    yield takeEvery(actions.GET_CONFIG, getConfig)
 
 
 

@@ -3,29 +3,27 @@ import reducerGenerator from './reducerGenerator'
 
 const initialState = {}
 
-const menu = reducerGenerator([GET_CONFIG], initialState, {
+const config = reducerGenerator([GET_CONFIG], initialState, {
     [`${GET_CONFIG}`]: (state, action) => {
         return {
             ...state,
-            pending: true,
-            authed: false
+            pending: true
         }
     },
-    [`${GET_MENU}/${SUCCESS}`]: (state, action) => {
+    [`${GET_CONFIG}/${SUCCESS}`]: (state, action) => {
+        return {
+            ...state,
+            [action.payload.entry]: action.payload.data,
+            pending: false
+        }
+    },
+    [`${GET_CONFIG}/${FAILURE}`]: (state, action) => {
         return {
             ...state,
             pending: false,
-            authed: true
-        }
-    },
-    [`${GET_MENU}/${FAILURE}`]: (state, action) => {
-        return {
-            ...state,
-            pending: false,
-            authed: false,
             error: action.payload
         }
     }
 })
 
-export default menu
+export default config

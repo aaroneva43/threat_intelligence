@@ -171,8 +171,6 @@ class Nav extends React.PureComponent {
 
                             </SubMenu>
 
-                            <Affix className='banner' style={{ position: 'absolute', right: '20px' }}>Threat Modeling</Affix>
-
                         </Menu>
                     }
 
@@ -198,7 +196,10 @@ class Nav extends React.PureComponent {
 
                     {renderMenu((menu.children || []).find(itm => itm.name === menu.selectedChild))}
 
+                    <Affix className='banner' style={{ position: 'absolute', right: '20px', top: '4px' }}>Threat Modeling</Affix>
                 </div >
+
+
 
             )
 
