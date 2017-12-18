@@ -1,8 +1,39 @@
-import React, { Component, createElement } from 'react'
+import React, { PureComponent, createElement } from 'react'
 import { connect } from 'react-redux';
 
-const Host = () => {
-    return <div style={{ height: 10000, width: 1075, background:'#fff' }}>Host</div>
+class Host extends Component {
+
+    componentDidMount () {
+
+    }
+    componentWillReceiveProps(nextProps) {
+
+        
+    }
+
+    render() {
+        const { location, auth, menu } = this.props
+
+        if (!auth.pending && !auth.authed) {
+            return <Login />
+
+        } else if (!auth.pending && auth.authed) {
+            return <div className='main'>
+                <Nav
+                    location={location}
+                    menuData={menu}
+                />
+                <div className='content'>
+                    <Route path="/dashboard" exact render={({ location }) => { return createElement(Dashboard) }} />
+                    <Route path="/assets/host" exact render={({ location }) => { return createElement(Host) }}/>
+                </div>
+            </div>
+
+        }
+
+    }
 }
 
-export default Host
+
+export default connect(state => ({ auth: _.get(state, 'auth', false), menu: _.get(state, 'menu', []) }))(Host)
+
