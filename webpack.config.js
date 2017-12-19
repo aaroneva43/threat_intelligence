@@ -44,7 +44,7 @@ module.exports = (env = {}) => {
             publicPath: '/'
         },
         //watch: true,
-        devtool: env.prod ? '' : 'source-map',
+        devtool: env.prod ? '' : 'inline-source-map',
         devServer: {
             contentBase: BUILD_DIR,
             historyApiFallback: true,
@@ -53,6 +53,7 @@ module.exports = (env = {}) => {
             compress: true,
             hot: true,
             // open: true
+            proxy: { '/ips**': { target: 'http://104.239.230.184:5000', secure: false } }
         },
         // devServer: {
         //   contentBase: BUILD_DIR,
