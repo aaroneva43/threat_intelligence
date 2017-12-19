@@ -1,0 +1,107 @@
+
+DeefaymatoMacBook-Pro:threat_intelligence deefay$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   src/containers/Main.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.DS_Store
+	src/.DS_Store
+	src/containers/Host.js
+
+no changes added to commit (use "git add" and/or "git commit -a")
+DeefaymatoMacBook-Pro:threat_intelligence deefay$ git add src/containers/Host.js
+DeefaymatoMacBook-Pro:threat_intelligence deefay$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   src/containers/Host.js
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   src/containers/Main.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.DS_Store
+	src/.DS_Store
+
+DeefaymatoMacBook-Pro:threat_intelligence deefay$ git add src/containers/Main.js
+DeefaymatoMacBook-Pro:threat_intelligence deefay$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   src/containers/Host.js
+	modified:   src/containers/Main.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.DS_Store
+	src/.DS_Store
+
+DeefaymatoMacBook-Pro:threat_intelligence deefay$ git commit -m 'host page modified'
+[master 2e7a591] host page modified
+ Committer: Deefay Young <deefay@DeefaymatoMacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 10 insertions(+)
+ create mode 100644 src/containers/Host.js
+DeefaymatoMacBook-Pro:threat_intelligence deefay$ git push
+Username for 'https://github.com': aaroneva43@163.com
+Password for 'https://aaroneva43@163.com@github.com': 
+Counting objects: 6, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 703 bytes | 703.00 KiB/s, done.
+Total 6 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+To https://github.com/aaroneva43/threat_intelligence.git
+   f0d3dc4..2e7a591  master -> master
+DeefaymatoMacBook-Pro:threat_intelligence deefay$ 
+
+
+
+//=================================================================================
+/-- to pull updates from github to local
+deefay$ git pull
+
+/-- to update to git
+deefay$ git pull --rebase
+deefay$ git status
+deefay$ git add 'filename'
+deefay$ git commit -m 'notes'
+deefay$ git push
+username/passeword: aaroneva43@163.com  !QAZ2wsx
+
+/-- start server
+under threat_intelligence directory, issue command "npm start"
+
+
+

@@ -51,4 +51,3 @@ export default connect(
     state => ({ data: _.get(state, 'config.ips', []) }),
     { getConfig: getConfig }
 )(Host)
-

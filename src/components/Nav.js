@@ -143,7 +143,7 @@ class Nav extends React.PureComponent {
                     {
                         menu.depth === 0 &&
                         <Menu mode="horizontal" className={'nav'}>
-                            <SubMenu className={style.menuL1} title={<span><Icon type="setting" />{menu.selectedChildText}</span>} >
+                            <SubMenu className={style.menuL1} title={<span><span className='icon_reports'/>{menu.selectedChildText}</span>} >
 
                                 {
 
@@ -162,7 +162,7 @@ class Nav extends React.PureComponent {
 
                             </SubMenu>
 
-                            <SubMenu className='submenu_profile' title={<span><Icon type="user" /> <span>admin</span></span>} >
+                            <SubMenu className='submenu_profile' title={<span><span className='icon_user'/> Deefay</span>} >
 
                                 <Menu.Item key='logout' >
                                     <Icon type='logout' />

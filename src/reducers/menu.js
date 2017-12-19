@@ -21,7 +21,7 @@ const initialState = [
             },
             {
                 name: 'topo',
-                text: '拓扑'
+                text: '网络拓扑'
             },
             {
                 name: 'leak',
