@@ -143,7 +143,7 @@ class Nav extends React.PureComponent {
                     {
                         menu.depth === 0 &&
                         <Menu mode="horizontal" className={'nav'}>
-                            <SubMenu className={style.menuL1} title={<span><span className='icon_reports'/>{menu.selectedChildText}</span>} >
+                            <SubMenu className={style.menuL1} title={<span><span className='icon_menu'/>{menu.selectedChildText}</span>} >
 
                                 {
 
@@ -196,7 +196,7 @@ class Nav extends React.PureComponent {
 
                     {renderMenu((menu.children || []).find(itm => itm.name === menu.selectedChild))}
 
-                    <Affix className='banner' style={{ position: 'absolute', right: '20px', top: '4px' }}>Threat Modeling</Affix>
+                    <Affix className='banner' style={{ position: 'absolute', right: '20px', top: '13px' }}>Threat Modeling</Affix>
                 </div >
 
 

@@ -69,11 +69,17 @@
 .nav .icon_configuration {
     background-image: url(../../public/img/icons/icon_configuration.svg);
 }
+.nav .icon_menu {
+    background-image: url(../../public/img/icons/icon_menu.svg);;
+    height: 22px;
+    width: 22px;
+    margin-bottom: -7px;
+}
 .nav .icon_user {
     background-image: url(../../public/img/icons/icon_user-menu.svg);
-    height: 20px;
-    width:20px;
-    margin-bottom: -5px;
+    height: 23px;
+    width:23px;
+    margin-bottom: -9px;
 }
 
 // .navsub {

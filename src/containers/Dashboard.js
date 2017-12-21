@@ -1,45 +1,82 @@
 import React, { Component, createElement } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
+import { Table } from 'antd';
 
 const Dashboard = () => {
-    return <div>
- 
-            <Row type="flex" justify="start">
+    return <div style={{height:'100%'}}>
+
+            <Row type="flex" justify="start" style={{height:'495px'}} gutter={20}>
+                <Col span={17}>
+                    <div style={{height:'400px' }}>
+                        <Row type="flex" justify="start" style={{height:'105px'}} gutter={20}>
+                            <Col span={8}>
+                                <div style={{background:'#fff', height:'85px' } }>
+                                    <Row  type="flex" justify="start" style={{height:'500px'}}>
+                                        <Col span={8} style={{background:'#528ee2', height:'85px'}}>
+                                            
+                                        </Col>
+                                    </Row>
+                                </div>      
+                            </Col>
+                            <Col span={8}>
+                            <div style={{background:'#fff', height:'85px' } }>
+                                <Row  type="flex" justify="start" style={{height:'500px'}}>
+                                    <Col span={8} style={{background:'#f4d58c', height:'85px'}}>
+                                        
+                                    </Col>
+                                </Row>
+                            </div>      
+                            </Col>
+                            <Col span={8}>
+                            <div style={{background:'#fff', height:'85px' } }>
+                                <Row  type="flex" justify="start" style={{height:'500px'}}>
+                                    <Col span={8} style={{background:'#d46d55', height:'85px'}}>
+                                        
+                                    </Col>
+                                </Row>
+                            </div>      
+                            </Col>
+                        </Row> 
+                        <Row type="flex" justify="start" style={{height:'370px'}} gutter={20}>
+                            <Col span={24}>
+                                <div style={{background:'#fff', height:'370px' } }>
+                                    360
+                                </div>      
+                            </Col>
+                        </Row> 
+                    </div>      
+                </Col>
+                <Col span={7}>
+                    <div style={{background:'#fff', height:'475px' }}>
+                        <Col>
+                            <Row type="flex" justify="start" style={{height:'30px', padding:'10px'}} >
+                                title
+                            </Row>
+                            <Row type="flex" justify="start" style={{height:'445px', padding:'10px'}} >
+                                
+                                <div>
+table goes here
+                                </div>
+                                
+                            </Row>                           
+                        </Col>
+                    </div>  
+                </Col>
+            </Row>  
+
+            <Row type="flex" justify="start" style={{height:'300px'}} gutter={20}>
                 <Col span={12}>
-                    <div style={{background:'#fff' }}>
+                    <div style={{background:'#fff', height:'300px' } }>
                         Host
                     </div>      
                 </Col>
                 <Col span={12}>
-                    <div style={{background:'#aaa' }}>
+                    <div style={{background:'#fff', height:'300px' }}>
                         Host
                     </div>  
                 </Col>
-            </Row>
-            <Row>
-                <Col span={8}>
-                    <div style={{background:'#3eda89' }}>
-                         three      
-                    </div>            
-                </Col>
-                <Col span={8}>
-                    <div style={{background:'#545454' }}>
-                         three      
-                    </div>            
-                </Col>
-                <Col span={8}>
-                    <div style={{background:'#919191' }}>
-                         three      
-                    </div>            
-                </Col>
-            </Row>
-            <Row>
-                <Col span={6}>col-6</Col>
-                <Col span={6}>col-6</Col>
-                <Col span={6}>col-6</Col>
-                <Col span={6}>col-6</Col>
-            </Row>
+            </Row>    
 
     </div>
 }
