@@ -14,6 +14,13 @@
     bottom:0px !important;
 }
 
+.nav .ant-dropdown-trigger{
+    color: #dedede !important;
+    :hover {
+        color: #fff !important;
+    }
+}
+
 .nav li.ant-menu-item, .ant-menu-submenu .ant-menu-submenu-title span {
     color : #fff;
 }
@@ -54,28 +61,36 @@
     height: 16px;
     display: inline-block;
 }
-.nav .icon_dashboard {
+
+.ant-dropdown span {
+    margin: auto 12px -2px auto;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.icon_dashboard {
     background-image: url(../../public/img/icons/icon_dashboard.svg);
 }   
-.nav .icon_assets {
+.icon_assets {
     background-image: url(../../public/img/icons/icon_assets.svg);
 }
-.nav .icon_discovery {
+.icon_discovery {
     background-image: url(../../public/img/icons/icon_discovery.svg);
 }
-.nav .icon_reports {
+.icon_reports {
     background-image: url(../../public/img/icons/icon_reports.svg);
 }
-.nav .icon_configuration {
+.icon_configuration {
     background-image: url(../../public/img/icons/icon_configuration.svg);
 }
-.nav .icon_menu {
+.icon_menu {
     background-image: url(../../public/img/icons/icon_menu.svg);;
     height: 22px;
     width: 22px;
     margin-bottom: -7px;
 }
-.nav .icon_user {
+.icon_user {
     background-image: url(../../public/img/icons/icon_user-menu.svg);
     height: 23px;
     width:23px;

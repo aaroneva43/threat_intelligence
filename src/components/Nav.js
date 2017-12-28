@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 
 import PropTypes from 'prop-types'
 
-import { Menu, Icon, Affix } from 'antd'
+import { Menu, Icon, Affix, Dropdown } from 'antd'
 import { Link } from 'react-router-dom'
 
 import style from './Nav.scss'
@@ -143,33 +143,44 @@ class Nav extends React.PureComponent {
                     {
                         menu.depth === 0 &&
                         <Menu mode="horizontal" className={'nav'}>
-                            <SubMenu className={style.menuL1} title={<span><span className='icon_menu'/>{menu.selectedChildText}</span>} >
+                            <Dropdown overlay={
+                                <Menu>
 
-                                {
+                                    {
 
-                                    (menu.children || []).map((itm) => {
-                                        return <Menu.Item
-                                            key={itm.name}
-                                            className={itm.url == location.pathname ? 'ant-menu-item-selected ant-menu-item' : ''}
-                                        >
-                                            <span className={'icon_' + itm.name} />
-                                            <Link style={{ display: 'inline-block' }} to={itm.url}>{itm.text}</Link>
-                                        </Menu.Item>
-                                    })
+                                        (menu.children || []).map((itm) => {
+                                            return <Menu.Item
+                                                key={itm.name}
+                                                className={itm.url == location.pathname ? 'ant-menu-item-selected' : ''}
+                                            >
+                                                <span className={'icon_' + itm.name} />
+                                                <Link style={{ display: 'inline-block' }} to={itm.url}>{itm.text}</Link>
+                                            </Menu.Item>
+                                        })
 
 
-                                }
+                                    }
 
-                            </SubMenu>
+                                </Menu>
+                            }>
+                                <a><span className='icon_menu' />{menu.selectedChildText}</a>
+                            </Dropdown>
 
-                            <SubMenu className='submenu_profile' title={<span><span className='icon_user'/> Deefay</span>} >
 
-                                <Menu.Item key='logout' >
-                                    <Icon type='logout' />
-                                    <Link style={{ display: 'inline-block' }} to='/' onClick={() => { dispatch(logout()) }}>{'logout'}</Link>
-                                </Menu.Item>
+                            <Dropdown style={{ position: 'absolute', right: 0 }} overlay={
+                                <Menu>
+                                    <Menu.Item key='logout' >
+                                        <Icon type='logout' />
+                                        <Link style={{ display: 'inline-block' }} to='/' onClick={() => { dispatch(logout()) }}>{'logout'}</Link>
+                                    </Menu.Item>
 
-                            </SubMenu>
+                                </Menu>
+                            }>
+                                <a className='submenu_profile' ><span className='icon_user' /> Deefay</a>
+                            </Dropdown>
+
+
+
 
                         </Menu>
                     }
