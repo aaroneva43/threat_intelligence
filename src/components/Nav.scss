@@ -71,30 +71,35 @@
 
 .icon_dashboard {
     background-image: url(../../public/img/icons/icon_dashboard.svg);
+    background-repeat: no-repeat;
 }   
 .icon_assets {
     background-image: url(../../public/img/icons/icon_assets.svg);
+    background-repeat: no-repeat;
 }
 .icon_discovery {
     background-image: url(../../public/img/icons/icon_discovery.svg);
+    background-repeat: no-repeat;
 }
 .icon_reports {
     background-image: url(../../public/img/icons/icon_reports.svg);
+    background-repeat: no-repeat;
 }
 .icon_configuration {
     background-image: url(../../public/img/icons/icon_configuration.svg);
+    background-repeat: no-repeat;
 }
 .icon_menu {
     background-image: url(../../public/img/icons/icon_menu.svg);;
-    height: 22px;
-    width: 22px;
-    margin-bottom: -7px;
+    height: 26px !important;
+    width: 26px !important;
+    margin-bottom: -10px !important;
 }
 .icon_user {
     background-image: url(../../public/img/icons/icon_user-menu.svg);
-    height: 23px;
-    width:23px;
-    margin-bottom: -9px;
+    height: 26px !important;
+    width: 26px !important;
+    margin-bottom: -10px !important;
 }
 
 .navsub {

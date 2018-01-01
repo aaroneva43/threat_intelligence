@@ -170,13 +170,13 @@ class Nav extends React.PureComponent {
                             <Dropdown style={{ position: 'absolute', right: 0 }} overlay={
                                 <Menu>
                                     <Menu.Item key='logout' >
-                                        <Icon type='logout' />
-                                        <Link style={{ display: 'inline-block' }} to='/' onClick={() => { dispatch(logout()) }}>{'logout'}</Link>
+                                        <Icon type='logout'/>
+                                        <Link style={{ display: 'inline-block' }} to='/' onClick={() => { dispatch(logout()) }}>{'Logout'}</Link>
                                     </Menu.Item>
 
                                 </Menu>
                             }>
-                                <a className='submenu_profile' ><span className='icon_user' /> Deefay</a>
+                                <a className='submenu_profile' ><span className='icon_user' />Admin</a>
                             </Dropdown>
 
 
