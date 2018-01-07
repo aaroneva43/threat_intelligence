@@ -1,4 +1,4 @@
-import { LOGIN, GET_CONFIG, SUCCESS, FAILURE } from './actionTypes'
+import { LOGIN, GET_CONFIG, EXIT_CONFIG, SUCCESS, FAILURE } from './actionTypes'
 import cookie from 'js-cookie'
 
 export const login = (payload) => {
@@ -22,13 +22,26 @@ export const logout = (payload) => {
 }
 
 export const getConfig = (entry, query) => {
-    
-        return {
-            type: `${GET_CONFIG}`,
-            payload: {
-                entry: entry,
-                query: query || {}
-            }
+
+    return {
+        type: `${GET_CONFIG}`,
+        payload: {
+            entry: entry,
+            query: query || {}
         }
-    
     }
+
+}
+
+
+export const exitConfig = (entry, query) => {
+
+    return {
+        type: `${EXIT_CONFIG}`,
+        payload: {
+            entry: entry,
+            query: query || {}
+        }
+    }
+
+}

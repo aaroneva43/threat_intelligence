@@ -1,11 +1,17 @@
 import React, { PureComponent, createElement } from 'react'
 import { connect } from 'react-redux'
-import { getConfig } from '../actions'
+import { getConfig, exitConfig } from '../actions'
 import { Table, Icon, Modal } from 'antd'
+import _ from 'lodash'
+
 
 class Topo extends PureComponent {
 
     componentDidMount() {
+
+        const { getConfig, exitConfig } = this.props
+
+        const me = this
 
         var nodes = null;
         var edges = null;
@@ -324,13 +330,9 @@ class Topo extends PureComponent {
         network.on("click", function (params) {
             params.event = "[original event]";
 
-            Modal.confirm({
-                title: 'Node',
-                content: JSON.stringify(params, null, 4),
-                okText: 'Ok',
-                cancelText: 'Cancel'
-
-            })
+            const entry = 'app_info/' + '172.16.0.2'
+            getConfig(entry)
+            me.setState({ entry })
             //document.getElementById('eventSpan');
             //.innerHTML = '<h2>Click event:</h2>' + JSON.stringify(params, null, 4);
             // console.log('double click event, getNodeAt returns: ' + JSON.stringify(params, null, 4));
@@ -341,12 +343,26 @@ class Topo extends PureComponent {
 
     render() {
 
+        const { config, exitConfig } = this.props,
+            entry = _.get(this.state, 'entry')
+
         return (
-            <div id="topo" style={{ height: '100%', background: '#fff' }}></div>
+            <div id="topo" style={{ height: '100%', background: '#fff' }}>
+
+                <Modal
+                    visible={!!config[entry]}
+                    onCancel={() => { exitConfig(entry) }}
+                >
+                    {JSON.stringify(config[entry])}
+                </Modal>
+            </div>
+
         )
     }
 }
 
 
-export default Topo
-
+export default connect(
+    state => ({ config: _.get(state, 'config', {}) }),
+    { getConfig: getConfig, exitConfig: exitConfig }
+)(Topo)
