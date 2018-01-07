@@ -2,6 +2,7 @@ import React, { PureComponent, createElement } from 'react'
 import { connect } from 'react-redux'
 import { getConfig } from '../actions'
 import { Table, Icon } from 'antd'
+import css from './Host.scss'
 
 class Host extends PureComponent {
 
@@ -10,7 +11,6 @@ class Host extends PureComponent {
         getConfig('ips')
     }
     componentWillReceiveProps(nextProps) {
-
 
     }
 
@@ -29,12 +29,14 @@ class Host extends PureComponent {
             title: '资产 IP',
             dataIndex: 'ip',
             key: 'ip',
-            flex: '1'
+            flex: '1',
+            className: 'medium'
+            
         },{
-            title: '类型',
+            title: '设备类型',
             dataIndex: '',
             key: '',
-            width: '120px'
+            width: '120px',
         },{
             title: '操作系统',
             dataIndex: '',
@@ -44,29 +46,57 @@ class Host extends PureComponent {
             title: '应用数量',
             dataIndex: '',
             key: '',
-            width: '200px'
+            width: '120px',
+            className: 'column-right_align'
         },{
             title: '漏洞数量',
-            dataIndex: '',
-            key: '',
-            width: '200px'
+            children: [{
+                title: '严重',
+                dataIndex: 'critical',
+                key: 'critical',
+                width: 80,
+                className: 'column-right_align'
+            }, {
+                title: '高',
+                dataIndex: 'high',          
+                key: 'high',
+                width: 80,
+                className: 'column-right_align'
+            }, {
+                title: '中',
+                dataIndex: 'medium',
+                key: 'medium',
+                width: 80,
+                className: 'column-right_align'
+            },{
+                title: '低',
+                dataIndex: 'low',
+                key: 'low',
+                width: 80,
+                className: 'column-right_align'
+            }],
         }
     ]
-
-
         return (
-            <Table style={ {height:'100%'}} 
-                columns={columns} 
-                expandedRowRender={record => <p style={{ margin: 0 }}>{record.ip}</p>}
-                dataSource={data} 
-            />
+            <div style={{ height: '100%', background: '#fff' }}>
+                <Table style={ {height:'100%'}} 
+                    columns={columns} 
+                    bordered
+                    dataSource={data}
+                    expandedRowRender={record => <div style={{ margin: 5, background:"#fff" }}>{record.ip}</div>} 
+                    size="small" 
+                />
+            </div>      
+            
         )
     }
 }
-
 
 export default connect(
     state => ({ data: _.get(state, 'config.ips', []) }),
     { getConfig: getConfig }
 )(Host)
+
+
+
 
