@@ -32,10 +32,99 @@ class Topo extends PureComponent {
 
         // Create a data table with nodes.
         nodes = [];
+//====== recieved json data ============/
+        var  jsonData = {
+          "130.207.160.173": {
+            "deviceType": "Host", 
+            "ip": "130.207.160.173", 
+            "numOfApps": "", 
+            "numOfOpenPorts": "", 
+            "osType": "", 
+            "route": "", 
+            "vulns": {
+              "critical": 0, 
+              "high": 0, 
+              "low": 1, 
+              "medium": 0
+            }
+          }, 
+          "164.67.228.152": {
+            "deviceType": "Host", 
+            "ip": "164.67.228.152", 
+            "numOfApps": "", 
+            "numOfOpenPorts": 2, 
+            "osType": "CentOS 6", 
+            "route": "192.168.1.78,75.49.252.1,71.148.134.57,71.145.0.206,12.83.39.145,12.122.114.5,* * *,4.15.122.46,137.164.11.31,137.164.11.0,137.164.11.36,137.164.11.23,* * *,169.232.4.8,169.232.4.53,* * *,164.67.134.252,164.67.228.152", 
+            "vulns": {
+              "critical": 0, 
+              "high": 0, 
+              "low": 16, 
+              "medium": 0
+            }
+          }, 
+          "172.16.0.2": {
+            "deviceType": "Host", 
+            "ip": "172.16.0.2", 
+            "numOfApps": 3, 
+            "numOfOpenPorts": 4, 
+            "osType": "Ubuntu 16.04", 
+            "route": "192.168.3.2,192.168.3.1,172.16.0.2", 
+            "vulns": {
+              "critical": 0, 
+              "high": 0, 
+              "low": 0, 
+              "medium": 0
+            }
+          }, 
+          "192.168.1.69": {
+            "deviceType": "Host", 
+            "ip": "192.168.1.69", 
+            "numOfApps": 6, 
+            "numOfOpenPorts": 8, 
+            "osType": "Windows 10 Home 16299", 
+            "route": "192.168.1.78,192.168.1.69", 
+            "vulns": {
+              "critical": 0, 
+              "high": 0, 
+              "low": 16, 
+              "medium": 0
+            }
+          }, 
+          "54.192.117.243": {
+            "deviceType": "Host", 
+            "ip": "54.192.117.243", 
+            "numOfApps": "", 
+            "numOfOpenPorts": 2, 
+            "osType": "", 
+            "route": "192.168.1.78,75.49.252.1,71.148.134.57,71.145.0.206,12.83.39.145,12.122.137.213,206.121.188.34,* * *,72.21.222.2,* * *,54.192.117.243", 
+            "vulns": {
+              "critical": 0, 
+              "high": 0, 
+              "low": 10, 
+              "medium": 0
+            }
+          }
+        }
 
+        console.log('json data', jsonData)
+//======recieved json data ends ========/
+        function addNodes(nodes){
+          var nodeLabel =  '130.207.160.173'
+
+          nodes.push({
+            id: 1,
+            label: nodeLabel,
+            group: 'switch'
+          });
+
+          return nodes;
+        
+        }
+
+        addNodes(nodes)
         // Create a data table with links.
         edges = [];
-
+/*
         nodes.push({
             id: 1,
             label: '192.168.0.1',
@@ -203,9 +292,9 @@ class Topo extends PureComponent {
             width: WIDTH_SCALE,
             //label: '0.63 mbps'
         });
+*/
 
-
-        /* legent ------------------------------------------------------
+/* legent ------------------------------------------------------
         var mynetwork = document.getElementById('topo');
         var x = mynetwork.clientWidth * 3 + 0;
         var y = mynetwork.clientHeight * 2 + 0;
