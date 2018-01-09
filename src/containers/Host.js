@@ -4,6 +4,8 @@ import { getConfig } from '../actions'
 import { Table, Icon } from 'antd'
 import css from './Host.scss'
 
+import _ from 'lodash'
+
 class Host extends PureComponent {
 
     componentDidMount() {
@@ -16,6 +18,9 @@ class Host extends PureComponent {
 
     render() {
         let { data = [] } = this.props
+
+        // var data = {'1.1.1.1': {foo: 333}, '2.2.2.2': {foo: 444}}
+        // _.map(data, (v, p) => { return _.extend({ip: p}, v)})
 
         data = data.map(itm => {
             return {
