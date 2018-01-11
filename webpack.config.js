@@ -49,7 +49,7 @@ module.exports = (env = {}) => {
             contentBase: BUILD_DIR,
             historyApiFallback: true,
             // host: "0.0.0.0",
-            port: 5010,
+            port: 5000,
             compress: true,
             hot: true,
             // open: true
