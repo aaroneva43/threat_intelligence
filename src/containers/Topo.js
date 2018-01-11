@@ -4,7 +4,7 @@ import { getConfig, exitConfig } from '../actions'
 import { Table, Icon, Modal } from 'antd'
 import _ from 'lodash'
 
-
+console.log('x_x')
 class Topo extends PureComponent {
     componentWillReceiveProps(nextProps) {
         const { graphData } = nextProps
