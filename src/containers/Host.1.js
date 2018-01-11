@@ -19,12 +19,13 @@ class Host extends PureComponent {
     render() {
         let { data = [] } = this.props
 
-
         const columns = [{
             title: '资产 IP',
             dataIndex: 'ip',
             key: 'ip',
             flex: '1',
+            
+
         }, {
             title: '设备类型',
             dataIndex: 'deviceType',
