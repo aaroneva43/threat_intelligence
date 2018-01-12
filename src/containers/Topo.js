@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 class Topo extends PureComponent {
     componentWillReceiveProps(nextProps) {
-        const { graphData } = nextProps
+        const { graphData, getConfig } = nextProps
 
         if (!_.isEmpty(graphData)) {console.log(graphData)
             const me = this
