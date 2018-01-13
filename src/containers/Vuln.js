@@ -21,55 +21,29 @@ class Vuln extends PureComponent {
 
 
         const columns = [{
-            title: '资产 IP',
-            dataIndex: 'ip',
+            title: '名称',
+            dataIndex: '',
             key: 'ip',
             flex: '1',
         }, {
-            title: '设备类型',
-            dataIndex: 'deviceType',
+            title: '严重程度',
+            dataIndex: '',
             key: '',
-            width: '120px',
-        }, {
-            title: '操作系统',
-            dataIndex: 'osType',
+            width: '80px',
+            className: 'column-center_align'
+        },{
+            title: '存在数量',
+            dataIndex: '',
             key: '',
-            width: '200px'
-        }, {
-            title: '应用数量',
-            dataIndex: 'numOfApps',
-            key: '',
-            width: '120px',
+            width: '80px',
             className: 'column-right_align'
         }, {
-            title: '漏洞数量',
-            children: [{
-                title: '严重',
-                dataIndex: 'vulns.critical',
-                key: '',
-                width: 80,
-                className: 'column-right_align critical'
-            }, {
-                title: '高',
-                dataIndex: 'vulns.high',
-                key: '',
-                width: 80,
-                className: 'column-right_align high'
-            }, {
-                title: '中',
-                dataIndex: 'vulns.medium',
-                key: '',
-                width: 80,
-                className: 'column-right_align medium'
-            }, {
-                title: '低',
-                dataIndex: 'vulns.low',
-                key: '',
-                width: 80,
-                className: 'column-right_align low'
-            }],
-        }
-        ]
+            title: '所属操作系统／应用',
+            dataIndex: 'numOfApps',
+            key: '',
+            width: '350px',
+           
+        }]
 
 
 

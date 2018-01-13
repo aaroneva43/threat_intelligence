@@ -22,17 +22,17 @@ class App extends PureComponent {
 
         const columns = [{
             title: '应用名称及版本',
-            dataIndex: 'ip',
+            dataIndex: '',
             key: 'ip',
             flex: '1',
         }, {
-            title: '数量',
+            title: '出现次数',
             dataIndex: 'numOfApps',
             key: '',
-            width: '120px',
+            width: '80px',
             className: 'column-right_align'
         }, {
-            title: '漏洞数量',
+            title: '存在的漏洞',
             children: [{
                 title: '严重',
                 dataIndex: 'vulns.critical',

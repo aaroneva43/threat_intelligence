@@ -16,16 +16,24 @@ const initialState = [
                 text: '主机'
             },
             {
+                name: 'netDevice',
+                text: '网络设备'
+            },
+            {
+                name: 'os',
+                text: '操作系统'
+            },
+            {
                 name: 'app',
                 text: '应用'
             },
             {
-                name: 'topo',
-                text: '网络拓扑'
-            },
-            {
                 name: 'vuln',
                 text: '漏洞'
+            },
+            {
+                name: 'topo',
+                text: '网络拓扑'
             }
         ]
     }, {

@@ -11,6 +11,8 @@ import Host from './Host'
 import Topo from './Topo'
 import App from './App'
 import Vuln from './Vuln'
+import Os from './Os'
+import NetDevice from './NetDevice'
 
 class Main extends Component {
     componentWillReceiveProps(nextProps) {
@@ -43,6 +45,8 @@ class Main extends Component {
                     <Route path="/assets/topo" exact render={({ location }) => { return createElement(Topo) }}/>
                     <Route path="/assets/app" exact render={({ location }) => { return createElement(App) }}/>
                     <Route path="/assets/vuln" exact render={({ location }) => { return createElement(Vuln) }}/>
+                    <Route path="/assets/Os" exact render={({ location }) => { return createElement(Os) }}/>
+                    <Route path="/assets/NetDevice" exact render={({ location }) => { return createElement(NetDevice) }}/>
                 </div>
             </div>
 

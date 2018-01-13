@@ -2,11 +2,11 @@ import React, { PureComponent, createElement } from 'react'
 import { connect } from 'react-redux'
 import { getConfig } from '../actions'
 import { Table, Icon } from 'antd'
-import css from './Host.scss'
+import css from './Os.scss'
 
 import _ from 'lodash'
 
-class Host extends PureComponent {
+class Os extends PureComponent {
 
     componentDidMount() {
         const { getConfig } = this.props
@@ -21,29 +21,18 @@ class Host extends PureComponent {
 
 
         const columns = [{
-            title: '主机 IP',
-            dataIndex: 'ip',
+            title: '操作系统及版本',
+            dataIndex: '',
             key: 'ip',
             flex: '1',
-        },{
-            title: '操作系统',
-            dataIndex: 'osType',
-            key: '',
-            width: '300px'
-        },{
-            title: '主机类型',
-            dataIndex: '',
-            key: '',
-            width: '80px',
-            className: 'column-center_align'
-        },{
-            title: '应用数量',
+        }, {
+            title: '出现次数',
             dataIndex: 'numOfApps',
             key: '',
             width: '80px',
             className: 'column-right_align'
         }, {
-            title: '漏洞数量',
+            title: '存在的漏洞',
             children: [{
                 title: '严重',
                 dataIndex: 'vulns.critical',
@@ -92,7 +81,7 @@ class Host extends PureComponent {
 export default connect(
     state => ({ data: _.get(state, 'config.brief', []) }),
     { getConfig: getConfig }
-)(Host)
+)(Os)
 
 
 
