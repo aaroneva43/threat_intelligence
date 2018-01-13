@@ -21,22 +21,12 @@ class App extends PureComponent {
 
 
         const columns = [{
-            title: '资产 IP',
+            title: '应用名称及版本',
             dataIndex: 'ip',
             key: 'ip',
             flex: '1',
         }, {
-            title: '设备类型',
-            dataIndex: 'deviceType',
-            key: '',
-            width: '120px',
-        }, {
-            title: '操作系统',
-            dataIndex: 'osType',
-            key: '',
-            width: '200px'
-        }, {
-            title: '应用数量',
+            title: '数量',
             dataIndex: 'numOfApps',
             key: '',
             width: '120px',

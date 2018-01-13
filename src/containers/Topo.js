@@ -169,7 +169,9 @@ class Topo extends PureComponent {
                     footer={null}
                     title="设备信息"
                 >
-                    {os_info}
+                    <div>
+                        {os_info}
+                    </div>
                   
                 </Modal>
             </div>
