@@ -8,7 +8,7 @@ class Topo extends PureComponent {
     componentWillReceiveProps(nextProps) {
         const { graphData, getConfig } = nextProps
 
-        if (!_.isEmpty(graphData)) {console.log(graphData)
+        if (!_.isEmpty(graphData)) {
             const me = this
             
             // Create a data table with nodes.
@@ -29,7 +29,6 @@ class Topo extends PureComponent {
                     var routeArray =[]
                     routeArray = graphData[i].route.split(",")
 
-                    console.log ('routes array', routeArray[0])
 
                     var color = null
 
@@ -135,13 +134,11 @@ class Topo extends PureComponent {
                 params.event = "[original event]";
                 
                 var nodeString = JSON.stringify(params, null, 4)
-                console.log('in side double click', nodeString)
-                console.log('ip: ' + JSON.parse(nodeString).nodes)
 
                 const entry = 'app_info/' + JSON.parse(nodeString).nodes
                 getConfig(entry)
                 me.setState({ entry })
-                
+
             });
         }
     }
@@ -156,6 +153,12 @@ class Topo extends PureComponent {
         const { config, exitConfig } = this.props,
             entry = _.get(this.state, 'entry')
 
+            var nodeDetails = JSON.stringify(config[entry], null, 4)
+            if(!_.isEmpty(nodeDetails)) {
+
+                var os_info = JSON.parse(nodeDetails).os_info 
+                console.log('nodeDetails.os_info  '+ os_info)
+            }
         return (
      
             <div id="topo" style={{ height: '100%', background: '#fff' }}>
@@ -166,7 +169,7 @@ class Topo extends PureComponent {
                     footer={null}
                     title="设备信息"
                 >
-                    {JSON.stringify(config[entry])}
+                    {os_info}
                   
                 </Modal>
             </div>

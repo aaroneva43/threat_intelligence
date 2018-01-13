@@ -24,7 +24,7 @@ const initialState = [
                 text: '网络拓扑'
             },
             {
-                name: 'leak',
+                name: 'vuln',
                 text: '漏洞'
             }
         ]
