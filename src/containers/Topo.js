@@ -153,11 +153,46 @@ class Topo extends PureComponent {
         const { config, exitConfig } = this.props,
             entry = _.get(this.state, 'entry')
 
+            const columns = [{
+                title: '服务／应用',
+                dataIndex: 'service',
+                key: 'service',
+                flex: '1'
+            },{
+                title: '端口',
+                dataIndex: 'port',
+                key: 'port',
+                width: '50'
+            },{
+                title: '协议',
+                dataIndex: 'protocol',
+                key: 'protocol',
+                flex: '50'
+            }]
+
+            var data =[]
+
             var nodeDetails = JSON.stringify(config[entry], null, 4)
             if(!_.isEmpty(nodeDetails)) {
 
-                var os_info = JSON.parse(nodeDetails).os_info 
-                console.log('nodeDetails.os_info  '+ os_info)
+                var osInfo = JSON.parse(nodeDetails).os_info
+                //var vulns =  JSON.parse(nodeDetails).vulns.low              
+                var services = JSON.parse(nodeDetails).services
+
+                if (!_.isEmpty(services)){
+                     var numOfService = services.length
+                     for( var i = 0; i < numOfService; i++){
+                         var serviceArray = services[i].split(",")
+                            data.push({
+                                port: serviceArray[0],
+                                protocol: serviceArray[1],   
+                                service: serviceArray[2],                   
+                            });
+                     }
+
+                }
+
+
             }
         return (
      
@@ -168,9 +203,31 @@ class Topo extends PureComponent {
                     onCancel={() => { exitConfig(entry) }}
                     footer={null}
                     title="设备信息"
+                    
                 >
                     <div>
-                        {os_info}
+                        <table width = '100%'>
+                            <tr height='34'>
+                                <td width = "100">IP</td>
+                                <td></td>
+                            </tr>
+                            <tr height='34'>
+                                <td>操作系统</td>
+                                <td>{osInfo}</td>
+                            </tr>
+                            <tr>
+                                <td>服务／应用</td>
+                                <td>
+                                    <Table style={{ height: '100%' }}
+                                        columns={columns}
+                                        dataSource={data}
+                                        size="small"
+                                        pagination={false}
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+
                     </div>
                   
                 </Modal>

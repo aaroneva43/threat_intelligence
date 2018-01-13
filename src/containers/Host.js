@@ -69,12 +69,12 @@ class Host extends PureComponent {
                 width: 80,
                 className: 'column-right_align low'
             }],
-        }
-        ]
+        }]
 
-
+console.log(data)
 
         return (
+
             <div style={{ height: '100%', background: '#fff' }}>
                 <Table style={{ height: '100%' }}
                     columns={columns}

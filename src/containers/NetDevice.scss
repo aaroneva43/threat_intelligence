@@ -3,6 +3,11 @@ td.column-right_align {
   text-align: right !important;
 }
 
+th.column-center_align,
+td.column-center_align {
+  text-align: center !important;
+}
+
 td.critical {
     color: #ff0000;
     font-weight: 500;
