@@ -155,6 +155,11 @@ class Topo extends PureComponent {
             entry = _.get(this.state, 'entry')
 
             const columns = [{
+                title: '',
+                dataIndex: 'index',
+                key: 'index',
+                width: '40px'
+            },{
                 title: '名称',
                 dataIndex: 'service',
                 key: 'service',
@@ -163,33 +168,41 @@ class Topo extends PureComponent {
                 title: '端口',
                 dataIndex: 'port',
                 key: 'port',
-                width: '50'
+                width: '80px'
             },{
                 title: '协议',
                 dataIndex: 'protocol',
                 key: 'protocol',
-                flex: '50'
+                width: '80px'
             }]
 
             var data =[]
 
             var nodeDetails = JSON.stringify(config[entry], null, 4)
+            var tabOneTitle = "服务／应用"
+            var tabTwoTitle = "严重漏洞"
+            var tabThreeTitle = "高危漏洞"
+            var tabFourTitle = "中危漏洞"
+            var tabFiveTitle = "低危漏洞"
+
             if(!_.isEmpty(nodeDetails)) {
 
-                var osInfo = JSON.parse(nodeDetails).os_info
-                //var vulns =  JSON.parse(nodeDetails).vulns.low              
+                var osInfo = JSON.parse(nodeDetails).os_info           
                 var services = JSON.parse(nodeDetails).services
+                
 
                 if (!_.isEmpty(services)){
                      var numOfService = services.length
                      for( var i = 0; i < numOfService; i++){
                          var serviceArray = services[i].split(",")
                             data.push({
+                                index: i, 
                                 port: serviceArray[0],
                                 protocol: serviceArray[1],   
                                 service: serviceArray[2],                   
                             });
                      }
+                     tabOneTitle = tabOneTitle + "  ( " + i + " )"
 
                 }
 
@@ -220,7 +233,7 @@ class Topo extends PureComponent {
                             <tr>
                                 <td colSpan="2">
                                     <Tabs defaultActiveKey="1">
-                                        <TabPane tab="服务／应用" key="1">
+                                        <TabPane tab= {tabOneTitle} key="1">
                                             <Table style={{ height: '100%' }}
                                                 columns={columns}
                                                 dataSource={data}
@@ -229,8 +242,17 @@ class Topo extends PureComponent {
                                                 pagination={false}
                                             />
                                         </TabPane>
-                                        <TabPane tab="漏洞" key="2">
+                                        <TabPane tab={tabTwoTitle} key="2">
                                             Content of Tab Pane 2
+                                        </TabPane>
+                                        <TabPane tab={tabThreeTitle} key="3">
+                                            Content of Tab Pane 3
+                                        </TabPane>
+                                        <TabPane tab={tabFourTitle} key="4">
+                                            Content of Tab Pane 4
+                                        </TabPane>
+                                        <TabPane tab={tabFiveTitle} key="5">
+                                            Content of Tab Pane 5
                                         </TabPane>
                                     </Tabs>
 

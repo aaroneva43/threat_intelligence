@@ -19,12 +19,22 @@ class Host extends PureComponent {
     render() {
         let { data = [] } = this.props
 
-
         const columns = [{
+            title: '',
+            dataIndex: 'index',
+            key: 'index',
+            width: '40px',
+        },{
             title: '主机 IP',
             dataIndex: 'ip',
             key: 'ip',
             flex: '1',
+        },{
+            title: '权重',
+            dataIndex: '',
+            key: '',
+            width: "80px",
+            className: 'column-center_align'
         },{
             title: '操作系统',
             dataIndex: 'osType',
@@ -69,6 +79,11 @@ class Host extends PureComponent {
                 width: 80,
                 className: 'column-right_align low'
             }],
+        },{
+            title: '管理员',
+            dataIndex: '',
+            key: '',
+            width: "100px"
         }]
 
 console.log(data)
