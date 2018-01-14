@@ -33,13 +33,13 @@ class Vuln extends PureComponent {
             className: 'column-center_align'
         },{
             title: '存在数量',
-            dataIndex: '',
+            dataIndex: 'numOfApps',
             key: '',
             width: '80px',
             className: 'column-right_align'
         }, {
             title: '所属操作系统／应用',
-            dataIndex: 'numOfApps',
+            dataIndex: '',
             key: '',
             width: '350px',
            
