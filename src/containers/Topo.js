@@ -2,6 +2,7 @@ import React, { PureComponent, createElement } from 'react'
 import { connect } from 'react-redux'
 import { getConfig, exitConfig } from '../actions'
 import { Table, Icon, Modal } from 'antd'
+import { Tabs } from 'antd'
 import _ from 'lodash'
 
 class Topo extends PureComponent {
@@ -149,12 +150,12 @@ class Topo extends PureComponent {
     }
 
     render() {
-
+        const TabPane = Tabs.TabPane
         const { config, exitConfig } = this.props,
             entry = _.get(this.state, 'entry')
 
             const columns = [{
-                title: '服务／应用',
+                title: '名称',
                 dataIndex: 'service',
                 key: 'service',
                 flex: '1'
@@ -194,6 +195,7 @@ class Topo extends PureComponent {
 
 
             }
+
         return (
      
             <div id="topo" style={{ height: '100%', background: '#fff' }}>
@@ -203,7 +205,7 @@ class Topo extends PureComponent {
                     onCancel={() => { exitConfig(entry) }}
                     footer={null}
                     title="设备信息"
-                    
+                    width='800px'
                 >
                     <div>
                         <table width = '100%'>
@@ -216,14 +218,22 @@ class Topo extends PureComponent {
                                 <td>{osInfo}</td>
                             </tr>
                             <tr>
-                                <td>服务／应用</td>
-                                <td>
-                                    <Table style={{ height: '100%' }}
-                                        columns={columns}
-                                        dataSource={data}
-                                        size="small"
-                                        pagination={false}
-                                    />
+                                <td colSpan="2">
+                                    <Tabs defaultActiveKey="1">
+                                        <TabPane tab="服务／应用" key="1">
+                                            <Table style={{ height: '100%' }}
+                                                columns={columns}
+                                                dataSource={data}
+                                                bordered
+                                                size="small"
+                                                pagination={false}
+                                            />
+                                        </TabPane>
+                                        <TabPane tab="漏洞" key="2">
+                                            Content of Tab Pane 2
+                                        </TabPane>
+                                    </Tabs>
+
                                 </td>
                             </tr>
                         </table>
