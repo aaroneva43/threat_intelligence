@@ -30,12 +30,6 @@ class Host extends PureComponent {
             key: 'ip',
             flex: '1',
         },{
-            title: '权重',
-            dataIndex: '',
-            key: '',
-            width: "80px",
-            className: 'column-center_align'
-        },{
             title: '操作系统',
             dataIndex: 'osType',
             key: '',
@@ -79,6 +73,12 @@ class Host extends PureComponent {
                 width: 80,
                 className: 'column-right_align low'
             }],
+        },{
+            title: '权重',
+            dataIndex: '',
+            key: '',
+            width: "80px",
+            className: 'column-center_align'
         },{
             title: '管理员',
             dataIndex: '',
