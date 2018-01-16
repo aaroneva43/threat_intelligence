@@ -65,7 +65,7 @@ class App extends PureComponent {
 
         return (
             <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{ height: '100%' }}
+                <Table style={{ height: '100%',margin: "20px"}}
                     columns={columns}
                     bordered
                     dataSource={data}

@@ -20,11 +20,6 @@ class Host extends PureComponent {
         let { data = [] } = this.props
 
         const columns = [{
-            title: '',
-            dataIndex: 'index',
-            key: 'index',
-            width: '40px',
-        },{
             title: '主机 IP',
             dataIndex: 'ip',
             key: 'ip',
@@ -91,7 +86,7 @@ console.log(data)
         return (
 
             <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{ height: '100%' }}
+                <Table style={{ height: '100%',margin: "20px"}}
                     columns={columns}
                     bordered
                     dataSource={data}

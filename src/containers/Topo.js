@@ -141,6 +141,8 @@ class Topo extends PureComponent {
                 me.setState({ entry })
 
             });
+            var zoomLevel = network.getScale()
+console.log('zoom level   ' + zoomLevel)
         }
     }
 
@@ -155,17 +157,17 @@ class Topo extends PureComponent {
             entry = _.get(this.state, 'entry')
 
             const columns = [{
-                title: '',
-                dataIndex: 'index',
-                key: 'index',
-                width: '40px'
-            },{
-                title: '名称',
+                title: '应用名',
                 dataIndex: 'service',
                 key: 'service',
                 flex: '1'
             },{
-                title: '端口',
+                title: '版本号',
+                dataIndex: '',
+                key: 'version',
+                width: '80px'
+            },{
+                title: '开放端口',
                 dataIndex: 'port',
                 key: 'port',
                 width: '80px'
@@ -174,19 +176,47 @@ class Topo extends PureComponent {
                 dataIndex: 'protocol',
                 key: 'protocol',
                 width: '80px'
+            }, {
+                title: '存在的漏洞',
+                children: [{
+                    title: '严重',
+                    dataIndex: 'vulns.critical',
+                    key: '',
+                    width: 50,
+                    className: 'column-right_align critical'
+                }, {
+                    title: '高',
+                    dataIndex: 'vulns.high',
+                    key: '',
+                    width: 50,
+                    className: 'column-right_align high'
+                }, {
+                    title: '中',
+                    dataIndex: 'vulns.medium',
+                    key: '',
+                    width: 50,
+                    className: 'column-right_align medium'
+                }, {
+                    title: '低',
+                    dataIndex: 'vulns.low',
+                    key: '',
+                    width: 50,
+                    className: 'column-right_align low'
+                }],
             }]
 
             var data =[]
 
             var nodeDetails = JSON.stringify(config[entry], null, 4)
-            var tabOneTitle = "服务／应用"
+            var tabOneTitle = "开放端口／应用"
             var tabTwoTitle = "严重漏洞"
             var tabThreeTitle = "高危漏洞"
             var tabFourTitle = "中危漏洞"
             var tabFiveTitle = "低危漏洞"
 
             if(!_.isEmpty(nodeDetails)) {
-
+console.log('host info ' + nodeDetails)
+                var hostIP = JSON.parse(nodeDetails).ip 
                 var osInfo = JSON.parse(nodeDetails).os_info           
                 var services = JSON.parse(nodeDetails).services
                 
@@ -196,7 +226,6 @@ class Topo extends PureComponent {
                      for( var i = 0; i < numOfService; i++){
                          var serviceArray = services[i].split(",")
                             data.push({
-                                index: i, 
                                 port: serviceArray[0],
                                 protocol: serviceArray[1],   
                                 service: serviceArray[2],                   
@@ -220,48 +249,60 @@ class Topo extends PureComponent {
                     title="设备信息"
                     width='800px'
                 >
-                    <div>
-                        <table width = '100%'>
-                            <tr height='34'>
-                                <td width = "100">IP</td>
-                                <td></td>
-                            </tr>
-                            <tr height='34'>
-                                <td>操作系统</td>
-                                <td>{osInfo}</td>
-                            </tr>
-                            <tr>
-                                <td colSpan="2">
-                                    <Tabs defaultActiveKey="1">
-                                        <TabPane tab= {tabOneTitle} key="1">
-                                            <Table style={{ height: '100%' }}
-                                                columns={columns}
-                                                dataSource={data}
-                                                bordered
-                                                size="small"
-                                                pagination={false}
-                                            />
-                                        </TabPane>
-                                        <TabPane tab={tabTwoTitle} key="2">
+                    <table width = '100%'>
+                        <tr>
+                            <td width = '50%'>
+                                <table width = '100%'>
+                                    <tr height='30'>
+                                        <td style={{fontWeight:'bold'}}>IP地址</td>
+                                        <td>{hostIP}</td>
+                                    </tr>
+                                    <tr height='30'>
+                                        <td style={{fontWeight:'bold'}}>操作系统</td>
+                                        <td>{osInfo}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width = '50%'>
+                                <table width = '100%'>
+                                    <tr height='30'>
+                                        <td style={{fontWeight:'bold'}}>权重</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr height='30'>
+                                        <td style={{fontWeight:'bold'}}>管理员</td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr height = '10px'></tr>
+                    </table>
+
+                    <Tabs defaultActiveKey="1" style={{ maxHeight: "300px",fontSize: "20px !important" }}>
+                        <TabPane tab= {tabOneTitle} key="1">
+                            <Table style={{ height: '100%' ,margin: "10px", marginTop: "0"}}
+                                columns={columns}
+                                dataSource={data}
+                                bordered
+                                size="small"
+                                pagination={false}
+                                //scroll={{ y: "275px" }}
+                            />
+                        </TabPane>
+                        <TabPane tab={tabTwoTitle} key="2">
                                             Content of Tab Pane 2
-                                        </TabPane>
-                                        <TabPane tab={tabThreeTitle} key="3">
+                        </TabPane>
+                        <TabPane tab={tabThreeTitle} key="3">
                                             Content of Tab Pane 3
-                                        </TabPane>
-                                        <TabPane tab={tabFourTitle} key="4">
+                        </TabPane>
+                        <TabPane tab={tabFourTitle} key="4">
                                             Content of Tab Pane 4
-                                        </TabPane>
-                                        <TabPane tab={tabFiveTitle} key="5">
+                        </TabPane>
+                        <TabPane tab={tabFiveTitle} key="5">
                                             Content of Tab Pane 5
-                                        </TabPane>
-                                    </Tabs>
-
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                  
+                        </TabPane>
+                    </Tabs>                 
                 </Modal>
             </div>
 
@@ -276,3 +317,5 @@ export default connect(
     }),
     { getConfig: getConfig, exitConfig: exitConfig }
 )(Topo)
+
+

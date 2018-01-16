@@ -29,13 +29,13 @@ class NetDevice extends PureComponent {
             title: '设备类型',
             dataIndex: '',
             key: '',
-            width: '80px',
+            width: '100px',
             className: 'column-center_align'
         }, {
             title: '操作系统',
             dataIndex: 'osType',
             key: '',
-            width: '200px'
+            width: '300px'
         }, {
             title: '服务/端口数量',
             dataIndex: 'numOfApps',
@@ -76,7 +76,7 @@ class NetDevice extends PureComponent {
 
         return (
             <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{ height: '100%' }}
+                <Table style={{ height: '100%',margin: "20px"}}
                     columns={columns}
                     bordered
                     dataSource={data}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getConfig } from '../actions'
 import { Table, Icon } from 'antd'
 import css from './Vuln.scss'
+import { Tabs } from 'antd'
 
 import _ from 'lodash'
 
@@ -18,7 +19,7 @@ class Vuln extends PureComponent {
 
     render() {
         let { data = [] } = this.props
-
+        const TabPane = Tabs.TabPane
 
         const columns = [{
             title: '名称',
@@ -45,17 +46,36 @@ class Vuln extends PureComponent {
            
         }]
 
-
-
         return (
-            <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{ height: '100%' }}
-                    columns={columns}
-                    bordered
-                    dataSource={data}
-                    expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
-                    size="small"
-                />
+            <div style={{ height: '100%', background: '#fff'}}>
+                <div style={{marginTop: "0px", marginLeft: "20px",marginRight: "20px",marginBottom: "20px"}}>
+                    <Tabs defaultActiveKey="1" >
+                        <TabPane tab= '全部' key="1">
+                        
+                            <Table style={{ height: '100%'}}
+                                columns={columns}
+                                bordered
+                                dataSource={data}
+                                expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
+                                size="small"
+                            />
+                    
+                        </TabPane>
+                        <TabPane tab='严重' key="2">
+                            Content of Tab Pane 2
+                        </TabPane>
+                        <TabPane tab='高' key="3">
+                            Content of Tab Pane 3
+                        </TabPane>
+                        <TabPane tab='中' key="4">
+                            Content of Tab Pane 4
+                        </TabPane>
+                        <TabPane tab='低' key="5">
+                            Content of Tab Pane 5
+                        </TabPane>
+                        
+                    </Tabs>
+                </div>
             </div>
 
         )
@@ -66,7 +86,5 @@ export default connect(
     state => ({ data: _.get(state, 'config.brief', []) }),
     { getConfig: getConfig }
 )(Vuln)
-
-
 
 
