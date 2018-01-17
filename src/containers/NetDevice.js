@@ -24,18 +24,16 @@ class NetDevice extends PureComponent {
             title: '设备 IP',
             dataIndex: 'ip',
             key: 'ip',
-            flex: '1',
+            width: '200px'
         }, {
             title: '设备类型',
             dataIndex: '',
             key: '',
-            width: '100px',
-            className: 'column-center_align'
+            width: '80px',
         }, {
             title: '操作系统',
             dataIndex: 'osType',
-            key: '',
-            width: '300px'
+            key: ''
         }, {
             title: '服务/端口数量',
             dataIndex: 'numOfApps',
@@ -76,12 +74,13 @@ class NetDevice extends PureComponent {
 
         return (
             <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{ height: '100%',margin: "20px"}}
+                <Table style={{ height: '100%', padding: "20px"}}
                     columns={columns}
                     bordered
                     dataSource={data}
                     expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
                     size="small"
+                    scroll={{ x: 1140 }}
                 />
             </div>
 

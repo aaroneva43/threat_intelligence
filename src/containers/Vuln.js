@@ -24,8 +24,7 @@ class Vuln extends PureComponent {
         const columns = [{
             title: '名称',
             dataIndex: '',
-            key: 'ip',
-            flex: '1',
+            key: 'ip'
         }, {
             title: '严重程度',
             dataIndex: '',
@@ -58,6 +57,7 @@ class Vuln extends PureComponent {
                                 dataSource={data}
                                 expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
                                 size="small"
+                                scroll={{ x: 1140 }}
                             />
                     
                         </TabPane>

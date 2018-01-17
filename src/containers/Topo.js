@@ -156,16 +156,29 @@ console.log('zoom level   ' + zoomLevel)
         const { config, exitConfig } = this.props,
             entry = _.get(this.state, 'entry')
 
+
+            function findVersion (string){
+
+                if (!_.isEmpty(string)){
+                    var location_begin = string.search("Version")
+                    
+                    if(location_begin > -1){
+                        var versionSubString = string.substring(location_begin)
+                        
+                        var location_end = versionSubString.search(" is")
+                        
+                        var version = versionSubString.substring(0,location_end)
+                        
+                        return version
+                    }
+                }
+            }
+
             const columns = [{
-                title: '应用名',
+                title: '应用名/版本',
                 dataIndex: 'service',
                 key: 'service',
                 flex: '1'
-            },{
-                title: '版本号',
-                dataIndex: '',
-                key: 'version',
-                width: '80px'
             },{
                 title: '开放端口',
                 dataIndex: 'port',
@@ -215,7 +228,6 @@ console.log('zoom level   ' + zoomLevel)
             var tabFiveTitle = "低危漏洞"
 
             if(!_.isEmpty(nodeDetails)) {
-console.log('host info ' + nodeDetails)
                 var hostIP = JSON.parse(nodeDetails).ip 
                 var osInfo = JSON.parse(nodeDetails).os_info           
                 var services = JSON.parse(nodeDetails).services
@@ -225,10 +237,11 @@ console.log('host info ' + nodeDetails)
                      var numOfService = services.length
                      for( var i = 0; i < numOfService; i++){
                          var serviceArray = services[i].split(",")
+                            var version = findVersion(serviceArray[3])                         
                             data.push({
                                 port: serviceArray[0],
                                 protocol: serviceArray[1],   
-                                service: serviceArray[2],                   
+                                service: serviceArray[2] + "\xa0\xa0 " + version,                   
                             });
                      }
                      tabOneTitle = tabOneTitle + "  ( " + i + " )"
@@ -281,7 +294,7 @@ console.log('host info ' + nodeDetails)
 
                     <Tabs defaultActiveKey="1" style={{ maxHeight: "300px",fontSize: "20px !important" }}>
                         <TabPane tab= {tabOneTitle} key="1">
-                            <Table style={{ height: '100%' ,margin: "10px", marginTop: "0"}}
+                            <Table style={{ height: '100%', padding: "10px", paddingTop: "0"}}
                                 columns={columns}
                                 dataSource={data}
                                 bordered
