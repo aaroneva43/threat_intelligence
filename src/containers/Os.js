@@ -10,7 +10,7 @@ class Os extends PureComponent {
 
     componentDidMount() {
         const { getConfig } = this.props
-        getConfig('brief')
+        getConfig('os_summary')
     }
     componentWillReceiveProps(nextProps) {
 
@@ -22,11 +22,11 @@ class Os extends PureComponent {
 
         const columns = [{
             title: '操作系统及版本',
-            dataIndex: '',
+            dataIndex: 'osName',
             key: 'os'
         }, {
             title: '出现次数',
-            dataIndex: 'numOfApps',
+            dataIndex: 'numOfInstances',
             key: '',
             width: '80px',
             className: 'column-right_align'
@@ -64,7 +64,7 @@ class Os extends PureComponent {
 
         return (
             <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{ height: '100%',padding: "20px"}}
+                <Table style={{padding: "20px", height: '100%'}}
                     columns={columns}
                     bordered
                     dataSource={data}
@@ -79,7 +79,7 @@ class Os extends PureComponent {
 }
 
 export default connect(
-    state => ({ data: _.get(state, 'config.brief', []) }),
+    state => ({ data: _.get(state, 'config.os_summary', []) }),
     { getConfig: getConfig }
 )(Os)
 

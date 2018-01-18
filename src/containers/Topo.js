@@ -4,6 +4,7 @@ import { getConfig, exitConfig } from '../actions'
 import { Table, Icon, Modal } from 'antd'
 import { Tabs } from 'antd'
 import _ from 'lodash'
+import css from './Table.scss'
 
 class Topo extends PureComponent {
     componentWillReceiveProps(nextProps) {
@@ -156,7 +157,7 @@ console.log('zoom level   ' + zoomLevel)
         const { config, exitConfig } = this.props,
             entry = _.get(this.state, 'entry')
 
-
+/*
             function findVersion (string){
 
                 if (!_.isEmpty(string)){
@@ -173,7 +174,7 @@ console.log('zoom level   ' + zoomLevel)
                     }
                 }
             }
-
+*/
             const columns = [{
                 title: '应用名/版本',
                 dataIndex: 'service',
@@ -194,25 +195,25 @@ console.log('zoom level   ' + zoomLevel)
                 children: [{
                     title: '严重',
                     dataIndex: 'vulns.critical',
-                    key: '',
+                    key: 'critical',
                     width: 50,
                     className: 'column-right_align critical'
                 }, {
                     title: '高',
                     dataIndex: 'vulns.high',
-                    key: '',
+                    key: 'high',
                     width: 50,
                     className: 'column-right_align high'
                 }, {
                     title: '中',
                     dataIndex: 'vulns.medium',
-                    key: '',
+                    key: 'medium',
                     width: 50,
                     className: 'column-right_align medium'
                 }, {
                     title: '低',
                     dataIndex: 'vulns.low',
-                    key: '',
+                    key: 'low',
                     width: 50,
                     className: 'column-right_align low'
                 }],
@@ -228,20 +229,19 @@ console.log('zoom level   ' + zoomLevel)
             var tabFiveTitle = "低危漏洞"
 
             if(!_.isEmpty(nodeDetails)) {
+                console.log('node details  ' + (nodeDetails))                  
                 var hostIP = JSON.parse(nodeDetails).ip 
                 var osInfo = JSON.parse(nodeDetails).os_info           
-                var services = JSON.parse(nodeDetails).services
-                
+                var services = JSON.parse(nodeDetails).services             
 
                 if (!_.isEmpty(services)){
                      var numOfService = services.length
                      for( var i = 0; i < numOfService; i++){
-                         var serviceArray = services[i].split(",")
-                            var version = findVersion(serviceArray[3])                         
+                         var serviceArray = services[i].split(",")                   
                             data.push({
                                 port: serviceArray[0],
                                 protocol: serviceArray[1],   
-                                service: serviceArray[2] + "\xa0\xa0 " + version,                   
+                                service: serviceArray[2],                   
                             });
                      }
                      tabOneTitle = tabOneTitle + "  ( " + i + " )"
@@ -262,35 +262,35 @@ console.log('zoom level   ' + zoomLevel)
                     title="设备信息"
                     width='800px'
                 >
-                    <table width = '100%'>
-                        <tr>
-                            <td width = '50%'>
-                                <table width = '100%'>
-                                    <tr height='30'>
-                                        <td style={{fontWeight:'bold'}}>IP地址</td>
-                                        <td>{hostIP}</td>
-                                    </tr>
-                                    <tr height='30'>
-                                        <td style={{fontWeight:'bold'}}>操作系统</td>
-                                        <td>{osInfo}</td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td width = '50%'>
-                                <table width = '100%'>
-                                    <tr height='30'>
-                                        <td style={{fontWeight:'bold'}}>权重</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr height='30'>
-                                        <td style={{fontWeight:'bold'}}>管理员</td>
-                                        <td></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr height = '10px'></tr>
-                    </table>
+                    <div>
+                        <div className="col1">
+                            <p><span>IP地址</span></p>
+                        </div>
+                        <div className="col2">
+                            <p>{hostIP}</p>
+                        </div>
+
+                        <div className="col1">
+                            <p>权重</p>
+                        </div>
+                        <div className="col2">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="col3">
+                                <p>操作系统</p>
+                            </div>
+                            <div className="col4">
+                                <p>{osInfo}</p>
+                        </div>
+                        <div className="col3">
+                            <p>管理员</p>
+                        </div>
+                        <div className="col4">
+                            <p></p>
+                        </div>
+                    </div>
 
                     <Tabs defaultActiveKey="1" style={{ maxHeight: "300px",fontSize: "20px !important" }}>
                         <TabPane tab= {tabOneTitle} key="1">
@@ -332,3 +332,34 @@ export default connect(
 )(Topo)
 
 
+ /*
+                    <table width = '100%'>
+                        <tr>
+                            <td width = '50%'>
+                                <table width = '100%'>
+                                    <tr height='30'>
+                                        <td style={{fontWeight:'bold'}}>IP地址</td>
+                                        <td>{hostIP}</td>
+                                    </tr>
+                                    <tr height='30'>
+                                        <td style={{fontWeight:'bold'}}>操作系统</td>
+                                        <td>{osInfo}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width = '50%'>
+                                <table width = '100%'>
+                                    <tr height='30'>
+                                        <td style={{fontWeight:'bold'}}>权重</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr height='30'>
+                                        <td style={{fontWeight:'bold'}}>管理员</td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr height = '10px'></tr>
+                    </table>
+*/

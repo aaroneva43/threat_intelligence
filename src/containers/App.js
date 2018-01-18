@@ -10,7 +10,7 @@ class App extends PureComponent {
 
     componentDidMount() {
         const { getConfig } = this.props
-        getConfig('brief')
+        getConfig('app_summary')
     }
     componentWillReceiveProps(nextProps) {
 
@@ -22,37 +22,47 @@ class App extends PureComponent {
 
         const columns = [{
             title: '应用名称及版本',
-            dataIndex: '',
-            key: 'ip'
-        }, {
+            dataIndex: 'appName',
+            key: 'appName'
+        },{
+            title: '端口',
+            dataIndex: 'port',
+            key: 'port',
+            width: '80px'
+        },{
+            title: '协议',
+            dataIndex: 'protocol',
+            key: 'protocol',
+            width: '80px'
+        },{
             title: '出现次数',
-            dataIndex: 'numOfApps',
-            key: '',
+            dataIndex: 'numOfInstances',
+            key: 'numOfInstances',
             width: '80px',
             className: 'column-right_align'
         }, {
             title: '存在的漏洞',
             children: [{
                 title: '严重',
-                dataIndex: 'vulns.critical',
-                key: '',
+                dataIndex: '',
+                key: 'critical',
                 width: 80,
                 className: 'column-right_align critical'
             }, {
                 title: '高',
-                dataIndex: 'vulns.high',
-                key: '',
+                dataIndex: '',
+                key: 'high',
                 width: 80,
                 className: 'column-right_align high'
             }, {
                 title: '中',
-                dataIndex: 'vulns.medium',
+                dataIndex: 'medium',
                 key: '',
                 width: 80,
                 className: 'column-right_align medium'
             }, {
                 title: '低',
-                dataIndex: 'vulns.low',
+                dataIndex: 'low',
                 key: '',
                 width: 80,
                 className: 'column-right_align low'
@@ -79,7 +89,7 @@ class App extends PureComponent {
 }
 
 export default connect(
-    state => ({ data: _.get(state, 'config.brief', []) }),
+    state => ({ data: _.get(state, 'config.app_summary', []) }),
     { getConfig: getConfig }
 )(App)
 

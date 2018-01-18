@@ -11,7 +11,7 @@ class Vuln extends PureComponent {
 
     componentDidMount() {
         const { getConfig } = this.props
-        getConfig('brief')
+        getConfig('vuln_summary')
     }
     componentWillReceiveProps(nextProps) {
 
@@ -23,7 +23,7 @@ class Vuln extends PureComponent {
 
         const columns = [{
             title: '名称',
-            dataIndex: '',
+            dataIndex: 'vulnName',
             key: 'ip'
         }, {
             title: '严重程度',
@@ -33,7 +33,7 @@ class Vuln extends PureComponent {
             className: 'column-center_align'
         },{
             title: '存在数量',
-            dataIndex: 'numOfApps',
+            dataIndex: 'numOfInstances',
             key: '',
             width: '80px',
             className: 'column-right_align'
@@ -83,7 +83,7 @@ class Vuln extends PureComponent {
 }
 
 export default connect(
-    state => ({ data: _.get(state, 'config.brief', []) }),
+    state => ({ data: _.get(state, 'config.vuln_summary', []) }),
     { getConfig: getConfig }
 )(Vuln)
 

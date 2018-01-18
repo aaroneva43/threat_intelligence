@@ -10,7 +10,7 @@ class NetDevice extends PureComponent {
 
     componentDidMount() {
         const { getConfig } = this.props
-        getConfig('brief')
+        getConfig('')
     }
     componentWillReceiveProps(nextProps) {
 
@@ -89,7 +89,7 @@ class NetDevice extends PureComponent {
 }
 
 export default connect(
-    state => ({ data: _.get(state, 'config.brief', []) }),
+    state => ({ data: _.get(state, 'config.', []) }),
     { getConfig: getConfig }
 )(NetDevice)
 
