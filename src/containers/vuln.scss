@@ -45,12 +45,12 @@ td.low {
 //===============  table style overwright begin ===================//
 
 .ant-table-small .ant-table-tbody > tr > td {
-    padding: 6px 8px !important;
+    padding: 4px 8px !important;
 
 }
 
 .ant-table-small .ant-table-title, .ant-table-small .ant-table-footer, .ant-table-small .ant-table-thead > tr > th {
-    padding: 6px 8px !important;
+    padding: 4px 8px !important;
 }
 
 .ant-table-small .ant-table-thead > tr > th {
@@ -66,4 +66,10 @@ td.low {
     color: hsla(0, 0%, 0%, 0.85);
 }
 
+div.scroll {
+    background-color: #00FFFF;
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+}
 //===============  table style overwright end ===================//

@@ -41,15 +41,21 @@ class Topo extends PureComponent {
                     } else if (vulnCritical == 0 && vulnHigh == 0 && vulnMedium > 0){
                         color = '#efd662'
                     } else if (vulnCritical == 0 && vulnHigh == 0 && vulnMedium == 0 && vulnLow > 0){
-                        color = '#8ab7f4'
+                        color = '#294596'
                     } else {
-                        color = '#8af4a5'
+                        color = '#216033'
                     }
                     nodes.push({
                         id: graphData[i].ip,
                         label: graphData[i].ip,
-                        color: color,
-                        shape:'dot',
+                        //color: color,
+                        shape: 'icon',
+                        icon: {
+                          face: 'FontAwesome',
+                          code: '\uf108',
+                          size: 50,
+                          color: color
+                        }
                         
                     });
                 }
@@ -95,8 +101,13 @@ class Topo extends PureComponent {
                 },
                 groups: {
                     'switch': {
-                        shape: 'dot',
-                        color: '#FF9900' // orange
+                        shape: 'icon',
+                        icon: {
+                          face: 'FontAwesome',
+                          code: '\uf0c0',
+                          size: 50,
+                          color: '#57169a'
+                        }
                     },
                     'desktop': {
                         shape: 'dot',
@@ -143,7 +154,13 @@ class Topo extends PureComponent {
 
             });
             var zoomLevel = network.getScale()
-console.log('zoom level   ' + zoomLevel)
+
+            network.once('stabilized', function() {
+                var scaleOption = { scale : 0.75 };
+                network.moveTo(scaleOption);
+            })
+
+
         }
     }
 
@@ -181,7 +198,7 @@ console.log('zoom level   ' + zoomLevel)
                 key: 'service',
                 flex: '1'
             },{
-                title: '开放端口',
+                title: '端口',
                 dataIndex: 'port',
                 key: 'port',
                 width: '80px'
@@ -194,51 +211,50 @@ console.log('zoom level   ' + zoomLevel)
                 title: '存在的漏洞',
                 children: [{
                     title: '严重',
-                    dataIndex: 'vulns.critical',
+                    dataIndex: '',
                     key: 'critical',
                     width: 50,
                     className: 'column-right_align critical'
                 }, {
                     title: '高',
-                    dataIndex: 'vulns.high',
+                    dataIndex: '',
                     key: 'high',
                     width: 50,
                     className: 'column-right_align high'
                 }, {
                     title: '中',
-                    dataIndex: 'vulns.medium',
+                    dataIndex: '',
                     key: 'medium',
                     width: 50,
                     className: 'column-right_align medium'
                 }, {
                     title: '低',
-                    dataIndex: 'vulns.low',
+                    dataIndex: '',
                     key: 'low',
                     width: 50,
                     className: 'column-right_align low'
                 }],
             }]
 
-            var data =[]
+            var appData =[]
 
             var nodeDetails = JSON.stringify(config[entry], null, 4)
-            var tabOneTitle = "开放端口／应用"
-            var tabTwoTitle = "严重漏洞"
-            var tabThreeTitle = "高危漏洞"
-            var tabFourTitle = "中危漏洞"
-            var tabFiveTitle = "低危漏洞"
+            var tabOneTitle = "应用"
+            var tabTwoTitle = "开放端口"
+            var tabThreeTitle = "漏洞"
 
             if(!_.isEmpty(nodeDetails)) {
                 console.log('node details  ' + (nodeDetails))                  
                 var hostIP = JSON.parse(nodeDetails).ip 
                 var osInfo = JSON.parse(nodeDetails).os_info           
-                var services = JSON.parse(nodeDetails).services             
+                var services = JSON.parse(nodeDetails).services    
+                var openPorts = JSON.parse(nodeDetails).ports          
 
                 if (!_.isEmpty(services)){
                      var numOfService = services.length
                      for( var i = 0; i < numOfService; i++){
                          var serviceArray = services[i].split(",")                   
-                            data.push({
+                            appData.push({
                                 port: serviceArray[0],
                                 protocol: serviceArray[1],   
                                 service: serviceArray[2],                   
@@ -247,6 +263,12 @@ console.log('zoom level   ' + zoomLevel)
                      tabOneTitle = tabOneTitle + "  ( " + i + " )"
 
                 }
+
+                if (!_.isEmpty(openPorts)){
+                    
+                    tabTwoTitle = tabTwoTitle + "  ( " + openPorts.split(',').length + " )"
+
+               }
 
 
             }
@@ -292,29 +314,25 @@ console.log('zoom level   ' + zoomLevel)
                         </div>
                     </div>
 
-                    <Tabs defaultActiveKey="1" style={{ maxHeight: "300px",fontSize: "20px !important" }}>
+                    <Tabs defaultActiveKey="1">
                         <TabPane tab= {tabOneTitle} key="1">
-                            <Table style={{ height: '100%', padding: "10px", paddingTop: "0"}}
+                            <Table style={{ padding: "10px", paddingTop: "0"}}
                                 columns={columns}
-                                dataSource={data}
+                                dataSource={appData}
                                 bordered
                                 size="small"
                                 pagination={false}
-                                //scroll={{ y: "275px" }}
+                                //scroll={{y:850 }}  
+                                
                             />
                         </TabPane>
                         <TabPane tab={tabTwoTitle} key="2">
-                                            Content of Tab Pane 2
+                                            {openPorts}
                         </TabPane>
                         <TabPane tab={tabThreeTitle} key="3">
                                             Content of Tab Pane 3
                         </TabPane>
-                        <TabPane tab={tabFourTitle} key="4">
-                                            Content of Tab Pane 4
-                        </TabPane>
-                        <TabPane tab={tabFiveTitle} key="5">
-                                            Content of Tab Pane 5
-                        </TabPane>
+
                     </Tabs>                 
                 </Modal>
             </div>
@@ -331,35 +349,3 @@ export default connect(
     { getConfig: getConfig, exitConfig: exitConfig }
 )(Topo)
 
-
- /*
-                    <table width = '100%'>
-                        <tr>
-                            <td width = '50%'>
-                                <table width = '100%'>
-                                    <tr height='30'>
-                                        <td style={{fontWeight:'bold'}}>IP地址</td>
-                                        <td>{hostIP}</td>
-                                    </tr>
-                                    <tr height='30'>
-                                        <td style={{fontWeight:'bold'}}>操作系统</td>
-                                        <td>{osInfo}</td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td width = '50%'>
-                                <table width = '100%'>
-                                    <tr height='30'>
-                                        <td style={{fontWeight:'bold'}}>权重</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr height='30'>
-                                        <td style={{fontWeight:'bold'}}>管理员</td>
-                                        <td></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr height = '10px'></tr>
-                    </table>
-*/

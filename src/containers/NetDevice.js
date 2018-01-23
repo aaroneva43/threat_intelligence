@@ -24,7 +24,8 @@ class NetDevice extends PureComponent {
             title: '设备 IP',
             dataIndex: 'ip',
             key: 'ip',
-            width: '200px'
+            width: '200px',
+            fixed: 'left'
         }, {
             title: '设备类型',
             dataIndex: '',
@@ -81,6 +82,7 @@ class NetDevice extends PureComponent {
                     expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
                     size="small"
                     scroll={{ x: 1140 }}
+                    pagination={{ hideOnSinglePage:true }}
                 />
             </div>
 

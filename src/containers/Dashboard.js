@@ -41,7 +41,7 @@ const Dashboard = () => {
                         <Row type="flex" justify="start" style={{height:'370px'}} gutter={20}>
                             <Col span={24}>
                                 <div style={{background:'#fff', height:'370px' } }>
-                                    360
+                                 
                                 </div>      
                             </Col>
                         </Row> 
@@ -51,12 +51,12 @@ const Dashboard = () => {
                     <div style={{background:'#fff', height:'475px' }}>
                         <Col>
                             <Row type="flex" justify="start" style={{height:'30px', padding:'10px'}} >
-                                title
+                                
                             </Row>
                             <Row type="flex" justify="start" style={{height:'445px', padding:'10px'}} >
                                 
                                 <div>
-table goes here
+
                                 </div>
                                 
                             </Row>                           
@@ -68,12 +68,12 @@ table goes here
             <Row type="flex" justify="start" style={{height:'300px'}} gutter={20}>
                 <Col span={12}>
                     <div style={{background:'#fff', height:'300px' } }>
-                        Host
+                        
                     </div>      
                 </Col>
                 <Col span={12}>
                     <div style={{background:'#fff', height:'300px' }}>
-                        Host
+                        
                     </div>  
                 </Col>
             </Row>    

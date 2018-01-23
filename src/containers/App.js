@@ -23,22 +23,24 @@ class App extends PureComponent {
         const columns = [{
             title: '应用名称及版本',
             dataIndex: 'appName',
-            key: 'appName'
+            key: 'appName',
+            width: 400,
+            
         },{
             title: '端口',
             dataIndex: 'port',
             key: 'port',
-            width: '80px'
+            width: 80
         },{
             title: '协议',
             dataIndex: 'protocol',
             key: 'protocol',
-            width: '80px'
+            width: 80
         },{
             title: '出现次数',
             dataIndex: 'numOfInstances',
             key: 'numOfInstances',
-            width: '80px',
+            width: 80,
             className: 'column-right_align'
         }, {
             title: '存在的漏洞',
@@ -57,13 +59,13 @@ class App extends PureComponent {
             }, {
                 title: '中',
                 dataIndex: 'medium',
-                key: '',
+                key: 'medium',
                 width: 80,
                 className: 'column-right_align medium'
             }, {
                 title: '低',
                 dataIndex: 'low',
-                key: '',
+                key: 'low',
                 width: 80,
                 className: 'column-right_align low'
             }],
@@ -80,7 +82,8 @@ class App extends PureComponent {
                     dataSource={data}
                     expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
                     size="small"
-                    scroll={{ x: 1140 }}
+                    scroll={{ x: 960 }}
+                    pagination={{ hideOnSinglePage:true }}
                 />
             </div>
 

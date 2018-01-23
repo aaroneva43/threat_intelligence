@@ -24,24 +24,25 @@ class Vuln extends PureComponent {
         const columns = [{
             title: '名称',
             dataIndex: 'vulnName',
-            key: 'ip'
+            key: 'vulnName',
+            width: 500
         }, {
             title: '严重程度',
-            dataIndex: '',
-            key: '',
-            width: '80px',
+            dataIndex: 'severity',
+            key: 'severity',
+            width: 80,
             className: 'column-center_align'
         },{
             title: '存在数量',
             dataIndex: 'numOfInstances',
-            key: '',
-            width: '80px',
+            key: 'numOfInstances',
+            width: 80,
             className: 'column-right_align'
         }, {
             title: '所属操作系统／应用',
-            dataIndex: '',
-            key: '',
-            width: '350px',
+            dataIndex: 'belongTo',
+            key: 'belongTo',
+            width: 300,
            
         }]
 
@@ -50,31 +51,25 @@ class Vuln extends PureComponent {
                 <div style={{marginTop: "0px", marginLeft: "20px",marginRight: "20px",marginBottom: "20px"}}>
                     <Tabs defaultActiveKey="1" >
                         <TabPane tab= '全部' key="1">
+
                         
-                            <Table style={{ height: '100%'}}
+                            <Table 
                                 columns={columns}
                                 bordered
                                 dataSource={data}
                                 expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
                                 size="small"
-                                scroll={{ x: 1140 }}
+                                pagination={{ hideOnSinglePage:true }}
+                                scroll={{x: 960, y:400 }}                          
                             />
-                    
+                        
+
                         </TabPane>
                         <TabPane tab='严重' key="2">
                             Content of Tab Pane 2
                         </TabPane>
-                        <TabPane tab='高' key="3">
-                            Content of Tab Pane 3
-                        </TabPane>
-                        <TabPane tab='中' key="4">
-                            Content of Tab Pane 4
-                        </TabPane>
-                        <TabPane tab='低' key="5">
-                            Content of Tab Pane 5
-                        </TabPane>
-                        
                     </Tabs>
+
                 </div>
             </div>
 
@@ -87,4 +82,31 @@ export default connect(
     { getConfig: getConfig }
 )(Vuln)
 
+/*
+            <div style={{ height: '100%', background: '#fff'}}>
+                <div style={{marginTop: "0px", marginLeft: "20px",marginRight: "20px",marginBottom: "20px"}}>
+                    <Tabs defaultActiveKey="1" >
+                        <TabPane tab= '全部' key="1">
 
+                        
+                            <Table 
+                                columns={columns}
+                                bordered
+                                dataSource={data}
+                                expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
+                                size="small"
+                                pagination={{ hideOnSinglePage:true }}
+                                scroll={{x: 960, y:400 }}                          
+                            />
+                        
+
+                        </TabPane>
+                        <TabPane tab='严重' key="2">
+                            Content of Tab Pane 2
+                        </TabPane>
+                    </Tabs>
+
+                </div>
+            </div>
+
+*/

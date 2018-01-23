@@ -23,13 +23,14 @@ class Os extends PureComponent {
         const columns = [{
             title: '操作系统及版本',
             dataIndex: 'osName',
-            key: 'os'
+            key: 'os',
+            width: 300
         }, {
             title: '出现次数',
             dataIndex: 'numOfInstances',
             key: '',
-            width: '80px',
-            className: 'column-right_align'
+            className: 'column-right_align',
+            width: 80
         }, {
             title: '存在的漏洞',
             children: [{
@@ -70,7 +71,8 @@ class Os extends PureComponent {
                     dataSource={data}
                     expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
                     size="small"
-                    scroll={{ x: 1140 }}
+                    scroll={{ x: 700 }}
+                    pagination={{ hideOnSinglePage:true }}
                 />
             </div>
 
