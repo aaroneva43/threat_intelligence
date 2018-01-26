@@ -41,7 +41,7 @@ const initialState = [
         text: '发现',
         children: [
             {
-                name: 'netBlock',
+                name: 'DiscoveryConfig',
                 text: '发现设置'
             }
         ]
