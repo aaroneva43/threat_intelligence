@@ -1,0 +1,37 @@
+th.column-right_align,
+td.column-right_align {
+  text-align: right !important;
+}
+
+th.column-center_align,
+td.column-center_align {
+  text-align: center !important;
+}
+
+td.critical {
+    color: #ff0000;
+    font-weight: 500;
+    padding: 0 20px;
+//    text-align: right;
+}
+
+td.high {
+    color: #ff8800;
+    font-weight: 500;
+    padding: 0 20px;
+//    text-align: right;
+}
+
+td.medium {
+    color: #ffe600;
+    font-weight: 500;
+    padding: 0 20px;
+//    text-align: right;
+}
+
+td.low {
+    color: #3c30e0;
+    font-weight: 500;
+    padding: 0 20px;
+//    text-align: right;
+}

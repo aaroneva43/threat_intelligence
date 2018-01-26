@@ -13,6 +13,7 @@ import App from './App'
 import Vuln from './Vuln'
 import Os from './Os'
 import NetDevice from './NetDevice'
+import NetBlock from './NetBlock'
 
 class Main extends Component {
     componentWillReceiveProps(nextProps) {
@@ -47,6 +48,7 @@ class Main extends Component {
                     <Route path="/assets/vuln" exact render={({ location }) => { return createElement(Vuln) }}/>
                     <Route path="/assets/Os" exact render={({ location }) => { return createElement(Os) }}/>
                     <Route path="/assets/NetDevice" exact render={({ location }) => { return createElement(NetDevice) }}/>
+                    <Route path="/assets/NetBlock" exact render={({ location }) => { return createElement(NetBlock) }}/>
                 </div>
             </div>
 

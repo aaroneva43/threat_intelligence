@@ -9,7 +9,7 @@ const initialState = [
     }, {
         name: 'assets',
         text: '资产',
-        icon: 'assets',
+        //icon: 'assets',
         children: [
             {
                 name: 'host',
@@ -38,7 +38,13 @@ const initialState = [
         ]
     }, {
         name: 'discovery',
-        text: '发现'
+        text: '发现',
+        children: [
+            {
+                name: 'netBlock',
+                text: '发现设置'
+            }
+        ]
     }, {
         name: 'reports',
         text: '报表'
