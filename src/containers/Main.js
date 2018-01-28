@@ -13,7 +13,7 @@ import App from './App'
 import Vuln from './Vuln'
 import Os from './Os'
 import NetDevice from './NetDevice'
-import NetBlock from './DiscoveryConfig'
+import DiscoveryConfig from './DiscoveryConfig'
 
 class Main extends Component {
     componentWillReceiveProps(nextProps) {
@@ -42,13 +42,13 @@ class Main extends Component {
                 />
                 <div className='content'>
                     <Route path="/dashboard" exact render={({ location }) => { return createElement(Dashboard) }} />
-                    <Route path="/assets/host" exact render={({ location }) => { return createElement(Host) }}/>
-                    <Route path="/assets/topo" exact render={({ location }) => { return createElement(Topo) }}/>
-                    <Route path="/assets/app" exact render={({ location }) => { return createElement(App) }}/>
-                    <Route path="/assets/vuln" exact render={({ location }) => { return createElement(Vuln) }}/>
-                    <Route path="/assets/Os" exact render={({ location }) => { return createElement(Os) }}/>
-                    <Route path="/assets/NetDevice" exact render={({ location }) => { return createElement(NetDevice) }}/>
-                    <Route path="/assets/DiscoveryConfig" exact render={({ location }) => { return createElement(DiscoveryConfig) }}/>
+                    <Route path="/assets/host" exact render={({ location }) => { return createElement(Host) }} />
+                    <Route path="/assets/topo" exact render={({ location }) => { return createElement(Topo) }} />
+                    <Route path="/assets/app" exact render={({ location }) => { return createElement(App) }} />
+                    <Route path="/assets/vuln" exact render={({ location }) => { return createElement(Vuln) }} />
+                    <Route path="/assets/Os" exact render={({ location }) => { return createElement(Os) }} />
+                    <Route path="/assets/NetDevice" exact render={({ location }) => { return createElement(NetDevice) }} />
+                    <Route path="/discovery/discovery_config" exact render={({ location }) => { return createElement(DiscoveryConfig) }} />
                 </div>
             </div>
 

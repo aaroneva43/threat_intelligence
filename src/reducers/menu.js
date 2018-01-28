@@ -41,7 +41,7 @@ const initialState = [
         text: '发现',
         children: [
             {
-                name: 'DiscoveryConfig',
+                name: 'discovery_config',
                 text: '发现设置'
             }
         ]
