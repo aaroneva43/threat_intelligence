@@ -30,14 +30,15 @@ class DiscoveryConfig extends PureComponent {
 
 
         return (
-
-            <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{ height: '100%', padding: "20px", position: "relative", top: '0px', bottom: '0px' }}
+            
+            <div style={{ height: '100%', background: '#fff', padding: "20px" }}>
+                <div style={{ paddingBottom: "10px"}}><span style={{fontWeight:600}}>网段设置</span></div>
+                <Table style={{ height: '100%', width: "600px", position: "relative", top: '0px', bottom: '0px' }}
                     columns={columns}
                     bordered
                     dataSource={data}
                     size="small"
-                    scroll={{ x: 1240 }}
+                    //scroll={{ x: 600 }}
                     pagination={{ hideOnSinglePage: true }}
                 />
             </div>
