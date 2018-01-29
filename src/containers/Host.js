@@ -161,16 +161,15 @@ class Host extends PureComponent {
         var tabOneTitle = "应用"
         var tabTwoTitle = "开放端口" 
         var tabThreeTitle = "漏洞"
-
-
+  
         return (
-            
+    
             <div style={{ height: '100%', background: '#fff'}}>
                 <Table style={{ height: '100%', padding: "20px",position:"relative",top:'0px',bottom:'0px' }}
                     columns={columnsHost}
                     bordered
                     dataSource={data}
-                    expandedRowRender={record => 
+                    expandedRowRender={record =>                       
                         <div style={{ padding: 15, margin: 10, background: "#fff" }}>
                             
                             <div>
@@ -196,7 +195,7 @@ class Host extends PureComponent {
                                 </div>
 
                                 <div className="col4">
-                                    <p>{record.osType}</p>
+                                    <Icon type="windows" style={{ fontSize: 16, color: '#08c' }} />{record.osType}
                                 </div>
 
                                 <div className="col3">
