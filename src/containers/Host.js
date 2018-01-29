@@ -26,7 +26,7 @@ class Host extends PureComponent {
         var hostArray = JSON.parse(hostDetails)
         var numOfHosts = hostArray.length
 
-        const columns = [{
+        const columnsHost = [{
             title: '主机 IP',
             dataIndex: 'ip',
             key: 'ip',
@@ -93,7 +93,7 @@ class Host extends PureComponent {
             width: 100
         }]
 
-        const columns2 = [{
+        const columnsApp = [{
             title: '应用名/版本',
             dataIndex: 'appName',
             key: 'service'
@@ -135,7 +135,29 @@ class Host extends PureComponent {
                 className: 'column-right_align low'
             }],
         }]
- 
+
+        const columnsVuln = [{
+            title: '漏洞名称',
+            dataIndex: 'vulnName',
+            key: 'vulnName'
+        },{
+            title: '严重程度',
+            dataIndex: 'severity',
+            key: 'sevrity',
+            width: '120px'
+        },{
+            title: '端口',
+            dataIndex: 'port',
+            key: 'port',
+            width: '80px'
+        },{
+            title: '协议',
+            dataIndex: 'protocol',
+            key: 'protocol',
+            width: '80px'
+        }]        
+
+
         var tabOneTitle = "应用"
         var tabTwoTitle = "开放端口" 
         var tabThreeTitle = "漏洞"
@@ -145,7 +167,7 @@ class Host extends PureComponent {
             
             <div style={{ height: '100%', background: '#fff'}}>
                 <Table style={{ height: '100%', padding: "20px",position:"relative",top:'0px',bottom:'0px' }}
-                    columns={columns}
+                    columns={columnsHost}
                     bordered
                     dataSource={data}
                     expandedRowRender={record => 
@@ -190,7 +212,7 @@ class Host extends PureComponent {
                             <Tabs defaultActiveKey="1">
                                 <TabPane tab= {tabOneTitle  + " ( " + record.numOfApps + " )"} key="1">
                                     <Table style={{ padding: "10px", paddingTop: "0"}}
-                                    columns={columns2}
+                                    columns={columnsApp}
                                     dataSource={record.services}
                                     bordered
                                     size="small"
@@ -203,7 +225,19 @@ class Host extends PureComponent {
                                    {record.ports}
                                 </TabPane>
                                 <TabPane tab={tabThreeTitle   + " ( " + (record.vulns.critical + record.vulns.high + record.vulns.medium + record.vulns.low) + " )"} key="3">
-                                                    Content of Tab Pane 3
+
+                                <div style={{background: "#fff" }}>   
+                                                         
+                                    <Table style={{ padding: "10px", paddingTop: "0"}}
+                                    columns={columnsVuln}
+                                    //dataSource={record.services}
+                                    bordered
+                                    size="small"
+                                    pagination={false}
+                                    //scroll={{y:550 }}  
+                                    
+                                    />
+                                    </div>
                                 </TabPane>
 
                             </Tabs>                 
