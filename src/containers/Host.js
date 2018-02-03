@@ -2,6 +2,7 @@ import React, { PureComponent, createElement } from 'react'
 import { connect } from 'react-redux'
 import { getConfig } from '../actions'
 import { Table, Icon } from 'antd'
+import { Pagination } from 'antd'
 import { Tabs } from 'antd'
 import css from './Host.scss'
 
@@ -22,6 +23,9 @@ class Host extends PureComponent {
         let { data = [] } = this.props
         const TabPane = Tabs.TabPane
         var hostDetails = JSON.stringify(data, null, 4)
+console.log('total number of recoreds   ' + data.length)
+
+        var pagination ={ total: data.length}
 
         var hostArray = JSON.parse(hostDetails)
         var numOfHosts = hostArray.length
@@ -30,7 +34,7 @@ class Host extends PureComponent {
             title: '主机 IP',
             dataIndex: 'ip',
             key: 'ip',
-            width: 200
+            width: 180
         },{
             title: '主机类型',
             dataIndex: '',
@@ -40,7 +44,7 @@ class Host extends PureComponent {
             title: '操作系统',
             dataIndex: 'osType',
             key: '',
-            width: 300
+            width: 270
         },{
             title: '应用',
             dataIndex: 'numOfApps',
@@ -163,15 +167,14 @@ class Host extends PureComponent {
         var tabThreeTitle = "漏洞"
   
         return (
-    
+
             <div style={{ height: '100%', background: '#fff'}}>
                 <Table style={{ height: '100%', padding: "20px",position:"relative",top:'0px',bottom:'0px' }}
                     columns={columnsHost}
                     bordered
                     dataSource={data}
-                    expandedRowRender={record =>                       
-                        <div style={{ padding: 15, margin: 10, background: "#fff" }}>
-                            
+                    expandedRowRender={record =>   
+                        <div style={{ padding: 15, margin: 10, background: "#fff" }}>                
                             <div>
                                 <div className="col1">
                                     <p><span>IP地址</span></p>
@@ -206,8 +209,6 @@ class Host extends PureComponent {
                                     <p></p>
                                 </div>
                             </div>
-
-
                             <Tabs defaultActiveKey="1">
                                 <TabPane tab= {tabOneTitle  + " ( " + record.numOfApps + " )"} key="1">
                                     <Table style={{ padding: "10px", paddingTop: "0"}}
@@ -216,7 +217,7 @@ class Host extends PureComponent {
                                     bordered
                                     size="small"
                                     pagination={false}
-                                    //scroll={{y:850 }}  
+                                    scroll={{y:850 }}  
                                     
                                     />
                                 </TabPane>
@@ -229,7 +230,7 @@ class Host extends PureComponent {
                                                          
                                     <Table style={{ padding: "10px", paddingTop: "0"}}
                                     columns={columnsVuln}
-                                    //dataSource={record.services}
+                                    dataSource={record.services}
                                     bordered
                                     size="small"
                                     pagination={false}
@@ -240,12 +241,11 @@ class Host extends PureComponent {
                                 </TabPane>
 
                             </Tabs>                 
-
                         </div>
                     }
                     size="small"
-                    scroll={{ x: 1240 }}
-                    pagination={{ hideOnSinglePage:true }}
+                    scroll={{ x: 1100 }}
+                    pagination={{ hideOnSinglePage:true}}
                 />
             </div>
 

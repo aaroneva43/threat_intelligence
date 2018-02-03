@@ -156,8 +156,17 @@ class Topo extends PureComponent {
             var zoomLevel = network.getScale()
 
             network.once('stabilized', function() {
-                var scaleOption = { scale : 0.75 };
-                network.moveTo(scaleOption);
+                var scaleOption = { data };
+                //network.moveTo(scaleOption);
+                network.fit({ 
+                    nodes:scaleOption,
+                    anmiation:{
+                        duration:20,
+                        easingFunction: easeInQuad
+                    }
+                
+                })
+
             })
 
 
@@ -174,24 +183,6 @@ class Topo extends PureComponent {
         const { config, exitConfig } = this.props,
             entry = _.get(this.state, 'entry')
 
-/*
-            function findVersion (string){
-
-                if (!_.isEmpty(string)){
-                    var location_begin = string.search("Version")
-                    
-                    if(location_begin > -1){
-                        var versionSubString = string.substring(location_begin)
-                        
-                        var location_end = versionSubString.search(" is")
-                        
-                        var version = versionSubString.substring(0,location_end)
-                        
-                        return version
-                    }
-                }
-            }
-*/
             const columns = [{
                 title: '应用名/版本',
                 dataIndex: 'service',

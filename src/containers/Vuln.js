@@ -20,7 +20,7 @@ class Vuln extends PureComponent {
     render() {
         let { data = [] } = this.props
         const TabPane = Tabs.TabPane
-
+console.log('vulns   ' + data)
         const columns = [{
             title: '名称',
             dataIndex: 'vulnName',
