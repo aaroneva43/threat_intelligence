@@ -52,7 +52,7 @@ class Nav extends React.PureComponent {
 
                 o.depth = depth
 
-                if ((!menu.widget && !menu.gid) || menu.widget == 'MultipleModulesConfig') {  // is catagory
+                if (menu.children) {  // is catagory
                     o.cat = true
                     o.url = menu.name == 'root' ? '' : (url + '/' + menu.name)
 
@@ -153,8 +153,11 @@ class Nav extends React.PureComponent {
                                                 key={itm.name}
                                                 className={itm.url == location.pathname ? 'ant-menu-item-selected' : ''}
                                             >
-                                                <span className={'icon_' + itm.name} />
-                                                <Link style={{ display: 'inline-block' }} to={itm.url}>{itm.text}</Link>
+
+                                                <Link style={{ display: 'inline-block', width: '100%' }} to={itm.url}>
+                                                    <span className={'icon_' + itm.name} />
+                                                    {itm.text}
+                                                </Link>
                                             </Menu.Item>
                                         })
 
@@ -170,7 +173,7 @@ class Nav extends React.PureComponent {
                             <Dropdown style={{ position: 'absolute', right: 0 }} overlay={
                                 <Menu>
                                     <Menu.Item key='logout' >
-                                        <Icon type='logout'/>
+                                        <Icon type='logout' />
                                         <Link style={{ display: 'inline-block' }} to='/' onClick={() => { dispatch(logout()) }}>{'Logout'}</Link>
                                     </Menu.Item>
 

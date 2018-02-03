@@ -19,13 +19,24 @@ class Host extends PureComponent {
 
     }
 
+    getOSIcon = (osType = '') => {
+
+        if (osType.toLowerCase().indexOf('windows') >= 0) {
+            return 'windows';
+        }
+
+
+        //TODO other os
+    }
+
     render() {
+        const me = this;
         let { data = [] } = this.props
         const TabPane = Tabs.TabPane
         var hostDetails = JSON.stringify(data, null, 4)
-console.log('total number of recoreds   ' + data.length)
+        console.log('total number of recoreds   ' + data.length)
 
-        var pagination ={ total: data.length}
+        var pagination = { total: data.length }
 
         var hostArray = JSON.parse(hostDetails)
         var numOfHosts = hostArray.length
@@ -35,17 +46,17 @@ console.log('total number of recoreds   ' + data.length)
             dataIndex: 'ip',
             key: 'ip',
             width: 180
-        },{
+        }, {
             title: '主机类型',
             dataIndex: '',
             key: '',
             width: 80
-        },{
+        }, {
             title: '操作系统',
             dataIndex: 'osType',
             key: '',
             width: 270
-        },{
+        }, {
             title: '应用',
             dataIndex: 'numOfApps',
             key: '',
@@ -84,13 +95,13 @@ console.log('total number of recoreds   ' + data.length)
                 width: 80,
                 className: 'column-right_align low'
             }],
-        },{
+        }, {
             title: '权重',
             dataIndex: '',
             key: '',
             width: 80,
             className: 'column-center_align'
-        },{
+        }, {
             title: '管理员',
             dataIndex: '',
             key: '',
@@ -101,12 +112,12 @@ console.log('total number of recoreds   ' + data.length)
             title: '应用名/版本',
             dataIndex: 'appName',
             key: 'service'
-        },{
+        }, {
             title: '端口',
             dataIndex: 'port',
             key: 'port',
             width: '80px'
-        },{
+        }, {
             title: '协议',
             dataIndex: 'protocol',
             key: 'protocol',
@@ -144,37 +155,37 @@ console.log('total number of recoreds   ' + data.length)
             title: '漏洞名称',
             dataIndex: 'vulnName',
             key: 'vulnName'
-        },{
+        }, {
             title: '严重程度',
             dataIndex: 'severity',
             key: 'sevrity',
             width: '120px'
-        },{
+        }, {
             title: '端口',
             dataIndex: 'port',
             key: 'port',
             width: '80px'
-        },{
+        }, {
             title: '协议',
             dataIndex: 'protocol',
             key: 'protocol',
             width: '80px'
-        }]        
+        }]
 
 
         var tabOneTitle = "应用"
-        var tabTwoTitle = "开放端口" 
+        var tabTwoTitle = "开放端口"
         var tabThreeTitle = "漏洞"
-  
+
         return (
 
-            <div style={{ height: '100%', background: '#fff'}}>
-                <Table style={{ height: '100%', padding: "20px",position:"relative",top:'0px',bottom:'0px' }}
+            <div style={{ height: '100%', background: '#fff' }}>
+                <Table style={{ height: '100%', padding: "20px", position: "relative", top: '0px', bottom: '0px' }}
                     columns={columnsHost}
                     bordered
                     dataSource={data}
-                    expandedRowRender={record =>   
-                        <div style={{ padding: 15, margin: 10, background: "#fff" }}>                
+                    expandedRowRender={record =>
+                        <div style={{ padding: 15, margin: 10, background: "#fff" }}>
                             <div>
                                 <div className="col1">
                                     <p><span>IP地址</span></p>
@@ -198,7 +209,7 @@ console.log('total number of recoreds   ' + data.length)
                                 </div>
 
                                 <div className="col4">
-                                    <Icon type="windows" style={{ fontSize: 16, color: '#08c' }} />{record.osType}
+                                    <Icon type={me.getOSIcon(record.osType)} style={{ fontSize: 16, color: '#08c' }} />{record.osType}
                                 </div>
 
                                 <div className="col3">
@@ -210,42 +221,42 @@ console.log('total number of recoreds   ' + data.length)
                                 </div>
                             </div>
                             <Tabs defaultActiveKey="1">
-                                <TabPane tab= {tabOneTitle  + " ( " + record.numOfApps + " )"} key="1">
-                                    <Table style={{ padding: "10px", paddingTop: "0"}}
-                                    columns={columnsApp}
-                                    dataSource={record.services}
-                                    bordered
-                                    size="small"
-                                    pagination={false}
-                                    scroll={{y:850 }}  
-                                    
-                                    />
-                                </TabPane>
-                                <TabPane tab={tabTwoTitle  + " ( " + record.numOfOpenPorts + " )"} key="2">
-                                   {record.ports}
-                                </TabPane>
-                                <TabPane tab={tabThreeTitle   + " ( " + (record.vulns.critical + record.vulns.high + record.vulns.medium + record.vulns.low) + " )"} key="3">
+                                <TabPane tab={tabOneTitle + " ( " + record.numOfApps + " )"} key="1">
+                                    <Table style={{ padding: "10px", paddingTop: "0" }}
+                                        columns={columnsApp}
+                                        dataSource={record.services}
+                                        bordered
+                                        size="small"
+                                        pagination={false}
+                                        scroll={{ y: 850 }}
 
-                                <div style={{background: "#fff" }}>   
-                                                         
-                                    <Table style={{ padding: "10px", paddingTop: "0"}}
-                                    columns={columnsVuln}
-                                    dataSource={record.services}
-                                    bordered
-                                    size="small"
-                                    pagination={false}
-                                    //scroll={{y:550 }}  
-                                    
                                     />
+                                </TabPane>
+                                <TabPane tab={tabTwoTitle + " ( " + record.numOfOpenPorts + " )"} key="2">
+                                    {record.ports}
+                                </TabPane>
+                                <TabPane tab={tabThreeTitle + " ( " + (record.vulns.critical + record.vulns.high + record.vulns.medium + record.vulns.low) + " )"} key="3">
+
+                                    <div style={{ background: "#fff" }}>
+
+                                        <Table style={{ padding: "10px", paddingTop: "0" }}
+                                            columns={columnsVuln}
+                                            dataSource={record.services}
+                                            bordered
+                                            size="small"
+                                            pagination={false}
+                                        //scroll={{y:550 }}  
+
+                                        />
                                     </div>
                                 </TabPane>
 
-                            </Tabs>                 
+                            </Tabs>
                         </div>
                     }
                     size="small"
                     scroll={{ x: 1100 }}
-                    pagination={{ hideOnSinglePage:true}}
+                    pagination={{ hideOnSinglePage: true, simple: false, showTotal: (total) => { return `Total ${total} items`; } }}
                 />
             </div>
 
