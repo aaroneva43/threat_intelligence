@@ -255,7 +255,7 @@ class Host extends PureComponent {
                         </div>
                     }
                     size="small"
-                    scroll={{ x: 1100 }}
+                    scroll={{ x: 1100}}
                     pagination={{ hideOnSinglePage: true, simple: false, showTotal: (total) => { return `Total ${total} items`; } }}
                 />
             </div>
