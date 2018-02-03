@@ -1,0 +1,11 @@
+.GlobalMask {
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    opacity: .7
+}
+  

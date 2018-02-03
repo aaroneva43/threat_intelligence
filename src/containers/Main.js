@@ -15,6 +15,9 @@ import Os from './Os'
 import NetDevice from './NetDevice'
 import DiscoveryConfig from './DiscoveryConfig'
 
+import Mask from '../components/GlobalMask'
+import GlobalMask from '../components/GlobalMask';
+
 class Main extends Component {
     componentWillReceiveProps(nextProps) {
 
@@ -29,7 +32,7 @@ class Main extends Component {
     }
 
     render() {
-        const { location, auth, menu } = this.props
+        const { location, auth, menu, config } = this.props
 
         if (!auth.pending && !auth.authed) {
             return <Login />
@@ -50,6 +53,7 @@ class Main extends Component {
                     <Route path="/assets/NetDevice" exact render={({ location }) => { return createElement(NetDevice) }} />
                     <Route path="/discovery/discovery_config" exact render={({ location }) => { return createElement(DiscoveryConfig) }} />
                 </div>
+                <GlobalMask visible={config.pending === true} />
             </div>
 
         }
@@ -58,4 +62,8 @@ class Main extends Component {
 }
 
 
-export default connect(state => ({ auth: _.get(state, 'auth', false), menu: _.get(state, 'menu', []) }))(Main)
+export default connect(state => ({
+    auth: _.get(state, 'auth', false),
+    menu: _.get(state, 'menu', []),
+    config: _.get(state, 'config', {})
+}))(Main)
