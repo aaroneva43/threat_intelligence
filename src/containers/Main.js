@@ -40,7 +40,7 @@ class Main extends Component {
                     location={location}
                     menuData={menu}
                 />
-                <div className='content'>
+                <div classdiName='content'>
                     <Route path="/dashboard" exact render={({ location }) => { return createElement(Dashboard) }} />
                     <Route path="/assets/host" exact render={({ location }) => { return createElement(Host) }} />
                     <Route path="/assets/topo" exact render={({ location }) => { return createElement(Topo) }} />

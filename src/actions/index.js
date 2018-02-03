@@ -1,4 +1,4 @@
-import { LOGIN, GET_CONFIG, EXIT_CONFIG, SUCCESS, FAILURE } from './actionTypes'
+import { LOGIN, GET_CONFIG, SET_CONFIG, POST_CONFIG, EXIT_CONFIG, DELETE_CONFIG, SUCCESS, FAILURE } from './actionTypes'
 import cookie from 'js-cookie'
 
 export const login = (payload) => {
@@ -33,6 +33,42 @@ export const getConfig = (entry, query) => {
 
 }
 
+export const setConfig = (entry, payload) => {
+
+    return {
+        type: `${SET_CONFIG}`,
+        payload: {
+            entry: entry,
+            data: payload.data
+        }
+    }
+
+}
+
+export const delConfig = (entry, payload) => {
+
+    return {
+        type: `${DELETE_CONFIG}`,
+        payload: {
+            entry: entry,
+            data: payload.data
+        }
+    }
+
+}
+
+export const postConfig = (entry, payload) => {
+
+    return {
+        type: `${POST_CONFIG}`,
+        payload: {
+            entry: entry,
+            data: payload.data
+        }
+    }
+
+}
+
 
 export const exitConfig = (entry, query) => {
 
@@ -45,3 +81,5 @@ export const exitConfig = (entry, query) => {
     }
 
 }
+
+
