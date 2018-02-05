@@ -21,6 +21,7 @@ class Topo extends PureComponent {
 
             function addNodes(nodes, graphData) {
 
+                var ICON_DIR = '../img/icons/'
                 var nodeLength = graphData.length
 
                 for (var i = 0; i < nodeLength; i++){
@@ -50,15 +51,15 @@ class Topo extends PureComponent {
                     nodes.push({
                         id: graphData[i].ip,
                         label: graphData[i].ip,
-                        //color: color,
+                        //image:  ICON_DIR+ 'icon_assets.svg', 
+                        //shape: 'image',
                         shape: 'icon',
                         icon: {
                           face: 'FontAwesome',
-                          code: '\uf108',
+                          code: '\uf26c',
                           size: 50,
-                          color: color
-                        }
-                        
+                          color: '#3b5d34'
+                        }                   
                     });
                 }
 
@@ -69,8 +70,8 @@ class Topo extends PureComponent {
             addNodes(nodes,graphData)
 
             edges.push({
-                from: '172.16.0.2',
-                to: '192.168.1.69',
+                from: '192.168.1.65',
+                to: '192.168.1.178',
                 length: 150,
                 width: 1
             });
@@ -161,16 +162,10 @@ class Topo extends PureComponent {
                 var scaleOption = { data };
                 //network.moveTo(scaleOption);
                 network.fit({ 
-                    nodes:scaleOption,
-                    anmiation:{
-                        duration:20
-                    }
-                
+                    nodes:scaleOption
                 })
 
             })
-
-
         }
     }
 

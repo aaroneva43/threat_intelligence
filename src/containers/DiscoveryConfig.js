@@ -63,14 +63,14 @@ class DiscoveryConfig extends PureComponent {
             const r = _.get(this.props, 'data', []).find(itm => itm.key === key);
 
             if (!_.isEmpty(r)) {
-                postConfig('ip_block', { data: { ip_block: r.ip } })
+                postConfig('ip_blocks', { data: { ip_block: r.ip } })
             }
         }
         const cancel = (key) => {
             const r = _.get(this.props, 'data', []).find(itm => itm.key === key);
 
             if (!_.isEmpty(r)) {
-                delConfig('ip_block', { data: { ip_block: r.ip } })
+                delConfig('ip_blocks', { data: { ip_block: r.ip } })
             }
         }
 
@@ -78,7 +78,7 @@ class DiscoveryConfig extends PureComponent {
             title: 'IP',
             dataIndex: 'ip',
             key: 'ip',
-            width: 80,
+            width: 200,
             render: (text, record, index) => {
                 return (
                     <EditableCell
@@ -90,8 +90,7 @@ class DiscoveryConfig extends PureComponent {
                 );
             }
         }, {
-            title: 'operation',
-            dataIndex: 'operation',
+
             render: (text, record) => {
                 const { editable, key } = record;
                 return (
@@ -104,12 +103,12 @@ class DiscoveryConfig extends PureComponent {
 
                                 if (key == '_add') {
                                     rslt = <span>
-                                        <a onClick={() => save(record.key)}>+</a>
+                                        <a onClick={() => save(record.key)}><Icon type='plus' style={{ fontSize: 14, color: '#000' }} /></a>
 
                                     </span>;
                                 } else {
                                     rslt = <span>
-                                        <a onClick={() => cancel(record.key)}>-</a>
+                                        <a onClick={() => cancel(record.key)}><Icon type='minus' style={{ fontSize: 14, color: '#000' }} /></a>
 
                                     </span>;
                                 }
@@ -124,15 +123,11 @@ class DiscoveryConfig extends PureComponent {
             },
         }];
 
-
-
-
-
         return (
 
             <div style={{ height: '100%', background: '#fff', padding: "20px" }}>
                 <div style={{ paddingBottom: "10px" }}><span style={{ fontWeight: 600 }}>网段设置</span></div>
-                <Table style={{ height: '100%', width: "600px", position: "relative", top: '0px', bottom: '0px' }}
+                <Table style={{ height: '100%', width: "230px", position: "relative", top: '0px', bottom: '0px' }}
                     columns={columns}
                     bordered
                     dataSource={data}

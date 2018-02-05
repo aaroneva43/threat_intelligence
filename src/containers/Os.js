@@ -21,17 +21,23 @@ class Os extends PureComponent {
 
 
         const columns = [{
+            title: '',
+            dataIndex: 'key',
+            key: 'key',
+            width: 50
+        },{
             title: '操作系统及版本',
             dataIndex: 'osName',
             key: 'os',
-            width: 300
+            //width: 300
         }, {
             title: '出现次数',
             dataIndex: 'numOfInstances',
             key: '',
             className: 'column-right_align',
             width: 80
-        }, {
+        }
+/*        , {
             title: '存在的漏洞',
             children: [{
                 title: '严重',
@@ -59,20 +65,23 @@ class Os extends PureComponent {
                 className: 'column-right_align low'
             }],
         }
+*/
         ]
-
-
-
         return (
             <div style={{ height: '100%', background: '#fff' }}>
                 <Table style={{padding: "20px", height: '100%'}}
                     columns={columns}
                     bordered
                     dataSource={data}
-                    expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
+                    expandedRowRender={record => 
+                        <div style={{ padding: 15, margin: 10, background: "#fff" }}>
+                        
+                            <p>{record.osName}</p>
+                                               
+                        </div>}
                     size="small"
-                    scroll={{ x: 700 }}
-                    pagination={{ hideOnSinglePage:true }}
+                    //scroll={{ x: 300 }}
+                    pagination={{ simple: false, showTotal: (total) => { return `共 ${total} 条`; } }}
                 />
             </div>
 

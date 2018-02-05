@@ -81,7 +81,7 @@ class NetDevice extends PureComponent {
                     dataSource={data}
                     expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
                     size="small"
-                    scroll={{ x: 1140 }}
+                    scroll={{ x: 840 }}
                     pagination={{ hideOnSinglePage:true }}
                 />
             </div>

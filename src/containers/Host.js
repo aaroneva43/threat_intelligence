@@ -23,6 +23,10 @@ class Host extends PureComponent {
 
         if (osType.toLowerCase().indexOf('windows') >= 0) {
             return 'windows';
+        } else if (osType.toLowerCase().indexOf('mac') >= 0) {
+            return 'apple';
+        } else if (osType.toLowerCase().indexOf('linux') >= 0) {
+            return 'linux';
         }
 
 
@@ -34,14 +38,16 @@ class Host extends PureComponent {
         let { data = [] } = this.props
         const TabPane = Tabs.TabPane
         var hostDetails = JSON.stringify(data, null, 4)
-        console.log('total number of recoreds   ' + data.length)
-
-        var pagination = { total: data.length }
 
         var hostArray = JSON.parse(hostDetails)
         var numOfHosts = hostArray.length
 
         const columnsHost = [{
+            title: '',
+            dataIndex: 'key',
+            key: 'key',
+            width: 50
+        },{
             title: '主机 IP',
             dataIndex: 'ip',
             key: 'ip',
@@ -180,7 +186,7 @@ class Host extends PureComponent {
         return (
 
             <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{ height: '100%', padding: "20px", position: "relative", top: '0px', bottom: '0px' }}
+                <Table style={{padding: "20px", position: "relative", top: '0px', bottom: '0px' }}
                     columns={columnsHost}
                     bordered
                     dataSource={data}
@@ -228,12 +234,11 @@ class Host extends PureComponent {
                                         bordered
                                         size="small"
                                         pagination={false}
-                                        scroll={{ y: 850 }}
 
                                     />
                                 </TabPane>
                                 <TabPane tab={tabTwoTitle + " ( " + record.numOfOpenPorts + " )"} key="2">
-                                    {record.ports}
+                                    {record.OpenPorts}
                                 </TabPane>
                                 <TabPane tab={tabThreeTitle + " ( " + (record.vulns.critical + record.vulns.high + record.vulns.medium + record.vulns.low) + " )"} key="3">
 
@@ -245,7 +250,6 @@ class Host extends PureComponent {
                                             bordered
                                             size="small"
                                             pagination={false}
-                                        //scroll={{y:550 }}  
 
                                         />
                                     </div>
@@ -256,7 +260,7 @@ class Host extends PureComponent {
                     }
                     size="small"
                     scroll={{ x: 1100}}
-                    pagination={{ hideOnSinglePage: true, simple: false, showTotal: (total) => { return `Total ${total} items`; } }}
+                    pagination={{ simple: false, showTotal: (total) => { return `共 ${total} 条`; } }}
                 />
             </div>
 

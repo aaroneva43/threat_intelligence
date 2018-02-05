@@ -156,6 +156,7 @@ class Nav extends React.PureComponent {
 
                                                 <Link style={{ display: 'inline-block', width: '100%' }} to={itm.url}>
                                                     <span className={'icon_' + itm.name} />
+                                                    
                                                     {itm.text}
                                                 </Link>
                                             </Menu.Item>

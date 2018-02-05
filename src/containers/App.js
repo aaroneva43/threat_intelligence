@@ -21,11 +21,14 @@ class App extends PureComponent {
 
 
         const columns = [{
+            title: '',
+            dataIndex: 'key',
+            key: 'key',
+            width: 50
+        },{
             title: '应用名称及版本',
             dataIndex: 'appName',
-            key: 'appName',
-            width: 400,
-            
+            key: 'appName',          
         },{
             title: '端口',
             dataIndex: 'port',
@@ -42,7 +45,9 @@ class App extends PureComponent {
             key: 'numOfInstances',
             width: 80,
             className: 'column-right_align'
-        }, {
+        }
+                
+/*       , {
             title: '存在的漏洞',
             children: [{
                 title: '严重',
@@ -70,6 +75,7 @@ class App extends PureComponent {
                 className: 'column-right_align low'
             }],
         }
+*/        
         ]
 
 
@@ -80,10 +86,16 @@ class App extends PureComponent {
                     columns={columns}
                     bordered
                     dataSource={data}
-                    expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
+                    expandedRowRender={record => 
+                        <div style={{ padding: 15, margin: 10, background: "#fff" }}>
+                        
+                            <p>{record.appName}</p>
+                                               
+                        </div>}
+
                     size="small"
                     scroll={{ x: 960 }}
-                    pagination={{ hideOnSinglePage:true }}
+                    pagination={{ simple: false, showTotal: (total) => { return `共 ${total} 条`; } }}
                 />
             </div>
 
