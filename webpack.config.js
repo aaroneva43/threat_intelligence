@@ -150,7 +150,8 @@ module.exports = (env = {}) => {
                 }
             ),
             new CopyWebpackPlugin([
-                { from: './public/img', to: 'img' }
+                { from: './public/img', to: 'img' },
+                { from: './public', to: 'public' }
             ],
                 { copyUnmodified: false }
             )
