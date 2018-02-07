@@ -40,7 +40,6 @@
     "antd": "^2.13.10",
     "bootstrap": "^4.0.0-beta",
     "chart.js": "2.6.0",
-    "font-awesome": "^4.7.0",
     "history": "4.7.2",
     "js-cookie": "^2.2.0",
     "liform-react": "^0.6.9",
@@ -69,9 +68,7 @@
     "superagent": "^3.6.1",
     "sweetalert-react": "^0.4.10",
     "underscore": "^1.8.3",
-    "underscore.string": "^3.3.4",
-    "vis": "4.21.0",
-    "fontawesome": "4.7.2"
+    "underscore.string": "^3.3.4"
   },
   "scripts": {
     "dev": "webpack -d --progress --watch --profile --json > compilation-stats.json --env.dev",
