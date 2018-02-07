@@ -5,8 +5,8 @@ import { Table, Icon, Modal } from 'antd'
 import { Tabs } from 'antd'
 import _ from 'lodash'
 import css from './Table.scss'
-// import vis from 'vis'
-import FontAwesome from 'fontawesome'
+
+// import FontAwesome from 'fontawesome'
 
 class Topo extends PureComponent {
     componentWillReceiveProps(nextProps) {
