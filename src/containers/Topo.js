@@ -6,7 +6,7 @@ import { Tabs } from 'antd'
 import _ from 'lodash'
 import css from './Table.scss'
 
-// import FontAwesome from 'fontawesome'
+import vis from 'vis'
 
 class Topo extends PureComponent {
     componentWillReceiveProps(nextProps) {
