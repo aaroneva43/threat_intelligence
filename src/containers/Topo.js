@@ -86,8 +86,8 @@ class Topo extends PureComponent {
             var options = {
                 nodes: {
                     scaling: {
-                        min: 16,
-                        max: 32
+                        min: 5,
+                        max: 10
                     }
                 },
                 edges: {
@@ -102,45 +102,15 @@ class Topo extends PureComponent {
                         iterations: 2500
                     }
                 },
-                groups: {
-                    'switch': {
-                        shape: 'icon',
-                        icon: {
-                          face: 'FontAwesome',
-                          code: '\uf0c0',
-                          size: 50,
-                          color: '#57169a'
-                        }
-                    },
-                    'desktop': {
-                        shape: 'dot',
-                        //color: "#2B7CE9" // blue
-                    },
-                    'red': {
-                        color: "#24e219" // blue
-                    },
-                    'mobile': {
-                        shape: 'dot',
-                        color: "#5A1E5C" // purple
-                    },
-                    'server': {
-                        shape: 'dot',
-                        //              color: {color: '#C5000B', opacity: 0.8}
-                        color: "#C5000B" // red
-                    },
-                    'internet': {
-                        shape: 'dot',
-                        //               color: {color: '#109618', opacity: 0.8}
-                        color: "#109618" // green
-                    }
-                },
+
                 layout: {
-                    hierarchical: {
-                        direction: "UD"
-                    }
+                    randomSeed: 1,
+                   // hierarchical: {
+                   //     direction: "LR"
+                   // }
                 },
                 interaction: {
-                    //navigationButtons: true,
+                    navigationButtons: true,
                     keyboard: true
                 }
             };
@@ -160,11 +130,7 @@ class Topo extends PureComponent {
 
             network.once('stabilized', function() {
                 var scaleOption = { data };
-                //network.moveTo(scaleOption);
-                network.fit({ 
-                    nodes:scaleOption
-                })
-
+                network.moveTo(scaleOption);
             })
         }
     }
