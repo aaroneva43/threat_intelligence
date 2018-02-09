@@ -182,10 +182,6 @@ class Nav extends React.PureComponent {
                             }>
                                 <a className='submenu_profile' ><span className='icon_user' />Admin</a>
                             </Dropdown>
-
-
-
-
                         </Menu>
                     }
 
