@@ -156,7 +156,7 @@ class Nav extends React.PureComponent {
 
                                                 <Link style={{ display: 'inline-block', width: '100%' }} to={itm.url}>
                                                     <span className={'icon_' + itm.name} />
-                                                    
+
                                                     {itm.text}
                                                 </Link>
                                             </Menu.Item>
@@ -180,7 +180,7 @@ class Nav extends React.PureComponent {
 
                                 </Menu>
                             }>
-                                <a className='submenu_profile' ><span className='icon_user' />Admin</a>
+                                <a className='submenu_profile' ><span className='fa fa-user-circle fa-2x' style={{ position: 'relative', top: '2px' }} />Admin</a>
                             </Dropdown>
                         </Menu>
                     }
