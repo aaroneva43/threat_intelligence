@@ -19,7 +19,36 @@ class Topo extends PureComponent {
             var nodes = [];
             var edges =[];
 
+
             function addNodes(nodes, graphData) {
+
+                function createImage(color) {
+                    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewPort="0 0 120 120">' +
+                              '<ellipse ry="50" rx="50" cy="60" cx="60" style="fill:'+color+';fill-opacity:0.4;stroke:'+color+';stroke-width:2;stroke-opacity:1" />' +
+                              '<text x="30" y="80" style="font-size:60px;fill:#000000;">&#128423;</text>' +
+                              '</svg>';
+                  
+                    return "data:image/svg+xml;charset=utf-8,"+ encodeURIComponent(svg); 
+                  }
+
+                  function getOSIcon (osType){
+                    
+                            if (osType.toLowerCase().indexOf('windows') >= 0) {
+                                return '\uf17a';
+                            } else if (osType.toLowerCase().indexOf('mac') >= 0) {
+                                return '\uf179';
+                            } else if (osType.toLowerCase().indexOf('linux') >= 0  ||  osType.toLowerCase().indexOf('ubuntu') >= 0) {
+                                return '\uf17c';
+                            } else {
+                                return '\uf26c'
+                            }
+                    
+                    
+                            //TODO other os
+                        }
+
+
+
 
                 var ICON_DIR = '../img/icons/'
                 var nodeLength = graphData.length
@@ -33,8 +62,6 @@ class Topo extends PureComponent {
 
                     var routeArray =[]
                     routeArray = graphData[i].route.split(",")
-
-
                     var color = null
 
                     if( vulnCritical > 0){
@@ -48,18 +75,20 @@ class Topo extends PureComponent {
                     } else {
                         color = '#216033'
                     }
+                    
+                    var ip = graphData[i].ip
+                    var iconCode = getOSIcon (graphData[i].osType)
+
                     nodes.push({
-                        id: graphData[i].ip,
-                        label: graphData[i].ip,
-                        //image:  ICON_DIR+ 'icon_assets.svg', 
-                        //shape: 'image',
+                        id: ip,
+                        label: ip,
                         shape: 'icon',
                         icon: {
                           face: 'FontAwesome',
-                          code: '\uf26c',
-                          size: 50,
-                          color: '#3b5d34'
-                        }                   
+                          code: iconCode,
+                          size: 30,
+                          color: color,
+                        },
                     });
                 }
 
@@ -94,15 +123,10 @@ class Topo extends PureComponent {
                     color: "#24e219",
                     smooth: false
                 },
-                physics: {
-                    barnesHut: {
-                        gravitationalConstant: -30000
-                    },
-                    stabilization: {
-                        iterations: 2500
-                    }
-                },
-
+                physics:{
+                    barnesHut:{gravitationalConstant:-3000},
+                    stabilization: {iterations:2500}
+                  },
                 layout: {
                     randomSeed: 1,
                    // hierarchical: {

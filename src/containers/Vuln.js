@@ -60,7 +60,7 @@ console.log('vulns   ' + data)
                                 expandedRowRender={record => <div style={{ margin: 5, background: "#fff" }}>{record.osType}</div>}
                                 size="small"
                                 pagination={{ hideOnSinglePage:true }}
-                                scroll={{x: 960, y:400 }}                          
+                                scroll={{x: 960}}                          
                             />
                         
 

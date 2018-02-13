@@ -19,10 +19,6 @@ class DiscoveryConfig extends PureComponent {
 
     }
 
-
-
-
-
     render() {
         let { getConfig, setConfig, postConfig, delConfig, data = [] } = this.props;
 

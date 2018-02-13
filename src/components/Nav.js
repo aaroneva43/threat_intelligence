@@ -20,7 +20,23 @@ class Nav extends React.PureComponent {
         menuData: PropTypes.array
     }
 
-
+    getMenuIcon = (menu = '') => {
+        
+                if (menu.toLowerCase().indexOf('dashboard') >= 0) {
+                    return 'fas fa-tachometer-alt fa-lg';
+                } else if (menu.toLowerCase().indexOf('assets') >= 0) {
+                    return 'fas fa-server fa-lg';
+                } else if (menu.toLowerCase().indexOf('discovery') >= 0) {
+                    return 'fas fa-crosshairs fa-lg';
+                } else if (menu.toLowerCase().indexOf('reports') >= 0) {
+                    return 'far fa-file-image fa-lg';
+                } else if (menu.toLowerCase().indexOf('configuration') >= 0) {
+                    return 'fas fa-wrench fa-lg';
+                }
+        
+        
+                //TODO other os
+    }
     /**
      * prepare menu data for renderring
      * @param {Array} menuData 
@@ -155,7 +171,7 @@ class Nav extends React.PureComponent {
                                             >
 
                                                 <Link style={{ display: 'inline-block', width: '100%' }} to={itm.url}>
-                                                    <span className={'icon_' + itm.name} />
+                                                    <span className={me.getMenuIcon(itm.name)} />
 
                                                     {itm.text}
                                                 </Link>
@@ -167,20 +183,20 @@ class Nav extends React.PureComponent {
 
                                 </Menu>
                             }>
-                                <a><span className='icon_menu' />{menu.selectedChildText}</a>
+                                <a><span className="fas fa-bars fa-lg" />{menu.selectedChildText}</a>
                             </Dropdown>
 
 
                             <Dropdown style={{ position: 'absolute', right: 0 }} overlay={
                                 <Menu>
                                     <Menu.Item key='logout' >
-                                        <Icon type='logout' />
+                                        <span className='fas fa-sign-out-alt fa-lg'/>
                                         <Link style={{ display: 'inline-block' }} to='/' onClick={() => { dispatch(logout()) }}>{'Logout'}</Link>
                                     </Menu.Item>
 
                                 </Menu>
                             }>
-                                <a className='submenu_profile' ><span className='fa fa-user-circle fa-2x' style={{ position: 'relative', top: '2px' }} />Admin</a>
+                                <a className='submenu_profile' ><span className='fa fa-user-circle fa-2x' style={{ position: 'relative', top: '4px', right:'10px' }} />Admin</a>
                             </Dropdown>
                         </Menu>
                     }
@@ -209,19 +225,10 @@ class Nav extends React.PureComponent {
 
                     <Affix className='banner' style={{ position: 'absolute', right: '20px', top: '13px' }}>Threat Modeling</Affix>
                 </div >
-
-
-
             )
-
-
         }
-
-
         return _.isArray(menuData) && menuData.length ? renderMenu(menu) : ''
     }
-
-
 }
 
 export default Nav

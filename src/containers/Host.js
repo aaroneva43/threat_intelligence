@@ -22,11 +22,11 @@ class Host extends PureComponent {
     getOSIcon = (osType = '') => {
 
         if (osType.toLowerCase().indexOf('windows') >= 0) {
-            return 'windows';
+            return 'fab fa-windows fa-lg';
         } else if (osType.toLowerCase().indexOf('mac') >= 0) {
-            return 'apple';
-        } else if (osType.toLowerCase().indexOf('linux') >= 0) {
-            return 'linux';
+            return 'fab fa-apple fa-lg';
+        } else if (osType.toLowerCase().indexOf('linux') >= 0  ||  osType.toLowerCase().indexOf('ubuntu') >= 0) {
+            return 'fab fa-linux fa-lg';
         }
 
 
@@ -42,6 +42,17 @@ class Host extends PureComponent {
         var hostArray = JSON.parse(hostDetails)
         var numOfHosts = hostArray.length
 
+        window.addEventListener("resize", myFunction);
+
+        function myFunction() {
+            
+            var hostTable = document.getElementById("myTable")
+
+            console.log('table ID is '+ hostTable)
+
+        }
+
+
         const columnsHost = [{
             title: '',
             dataIndex: 'key',
@@ -51,7 +62,7 @@ class Host extends PureComponent {
             title: '主机 IP',
             dataIndex: 'ip',
             key: 'ip',
-            width: 180
+            width: 140
         }, {
             title: '主机类型',
             dataIndex: '',
@@ -60,18 +71,17 @@ class Host extends PureComponent {
         }, {
             title: '操作系统',
             dataIndex: 'osType',
-            key: '',
-            width: 270
+            key: 'osType'
         }, {
             title: '应用',
             dataIndex: 'numOfApps',
-            key: '',
+            key: 'numOfApps',
             width: 80,
             className: 'column-right_align'
         }, {
             title: '开放端口',
             dataIndex: 'numOfOpenPorts',
-            key: '',
+            key: 'numOfOpenPorts',
             width: 80,
             className: 'column-right_align'
         }, {
@@ -79,25 +89,25 @@ class Host extends PureComponent {
             children: [{
                 title: '严重',
                 dataIndex: 'vulns.critical',
-                key: '',
+                key: 'vulns.critical',
                 width: 80,
                 className: 'column-right_align critical'
             }, {
                 title: '高',
                 dataIndex: 'vulns.high',
-                key: '',
+                key: 'vulns.high',
                 width: 80,
                 className: 'column-right_align high'
             }, {
                 title: '中',
                 dataIndex: 'vulns.medium',
-                key: '',
+                key: 'vulns.medium',
                 width: 80,
                 className: 'column-right_align medium'
             }, {
                 title: '低',
                 dataIndex: 'vulns.low',
-                key: '',
+                key: 'vulns.lowwewswwqdssw  q1  `',
                 width: 80,
                 className: 'column-right_align low'
             }],
@@ -111,7 +121,7 @@ class Host extends PureComponent {
             title: '管理员',
             dataIndex: '',
             key: '',
-            width: 100
+            width: 80
         }]
 
         const columnsApp = [{
@@ -186,7 +196,7 @@ class Host extends PureComponent {
         return (
 
             <div style={{ height: '100%', background: '#fff' }}>
-                <Table style={{padding: "20px", position: "relative", top: '0px', bottom: '0px' }}
+                <Table id='myTable' style={{padding: "20px", position: "relative", top: '0px', bottom: '0px' }}
                     columns={columnsHost}
                     bordered
                     dataSource={data}
@@ -215,7 +225,7 @@ class Host extends PureComponent {
                                 </div>
 
                                 <div className="col4">
-                                    <Icon type={me.getOSIcon(record.osType)} style={{ fontSize: 16, color: '#08c' }} />{record.osType}
+                                    <span className={me.getOSIcon(record.osType)} style={{ marginRight: "10px", color:'#3b5d34'}}/>{record.osType}
                                 </div>
 
                                 <div className="col3">
@@ -259,8 +269,8 @@ class Host extends PureComponent {
                         </div>
                     }
                     size="small"
-                    scroll={{ x: 1100}}
-                    pagination={{ simple: false, showTotal: (total) => { return `共 ${total} 条`; } }}
+                    scroll={{ x: 1180, y: window.innerHeight - 250}}
+                    pagination={{pageSize: 25, showTotal: (total) => { return `共 ${total} 条`; } }}
                 />
             </div>
 

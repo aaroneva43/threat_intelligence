@@ -94,8 +94,9 @@ class App extends PureComponent {
                         </div>}
 
                     size="small"
-                    scroll={{ x: 960 }}
-                    pagination={{ simple: false, showTotal: (total) => { return `共 ${total} 条`; } }}
+                    //scroll={{ x: 960 }}
+                    scroll={{ x: 960, y: window.innerHeight - 250}}
+                    pagination={{ pageSize: 25,simple: false, showTotal: (total) => { return `共 ${total} 条`; } }}
                 />
             </div>
 
