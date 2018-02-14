@@ -21,7 +21,7 @@ class Topo extends PureComponent {
             var edges =[];
 
 
-            function addNodes(nodes, graphData) {
+                function addNodes(nodes, graphData) {
 
                 function createImage(color) {
                     var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewPort="0 0 120 120">' +
@@ -44,6 +44,25 @@ class Topo extends PureComponent {
                         return '\uf26c'
                     }                  
                             //TODO other os
+                }
+
+                function getColor (){
+
+                    var colorIndex = Math.floor(Math.random() * 5 + 1);
+
+                    if( colorIndex == 1){
+                        color = '#e95a5a'
+                    } else if (colorIndex == 2){
+                        color = '#e9a84a'
+                    } else if (colorIndex == 3){
+                        color = '#efd662'
+                    } else if (colorIndex == 4){
+                        color = '#294596'
+                    } else if (colorIndex == 5){
+                        color = '#216033'
+                    } 
+
+                    return color
                 }
 
                 function getSubNets (graphData){
@@ -74,8 +93,6 @@ class Topo extends PureComponent {
 
                 var unique_subnetArray = getSubNets (graphData)
 
-                console.log('setnet array   ' + unique_subnetArray)
-
                 var ICON_DIR = '../img/icons/'
 
                 for (var i = 0; i < graphData.length; i++){
@@ -105,17 +122,19 @@ class Topo extends PureComponent {
                     var ipArray = ip.split(".")
                     var subnetC = ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2]
 
-                    var group = unique_subnetArray.indexOf(subnetC)
+                    var subnetId = unique_subnetArray.indexOf(subnetC)
 
-                    console.log('ip and group  is   ' + ip + '   ' +  group)
+                    console.log('ip and group  is   ' + ip + '   ' +  subnetId)
 
                     var iconCode = getOSIcon (graphData[i].osType)
                     var size = (Math.floor(Math.random() * 10 + 1)) * 5;
 
+                    color = getColor()
+
                     nodes.push({
                         id: ip,
                         label: ip,
-                        group: group,
+                        subnet: subnetId,
                         shape: 'icon',
                         icon: {
                           face: 'FontAwesome',
@@ -208,7 +227,7 @@ class Topo extends PureComponent {
             network.once('stabilized', function() {
                 var scaleOption = { data };
                 network.moveTo(scaleOption);
-            })
+            })            
         }
     }
 
@@ -216,6 +235,8 @@ class Topo extends PureComponent {
         const { getConfig, exitConfig, graphData } = this.props
         getConfig('brief')        
     }
+
+
 
     render() {
         const TabPane = Tabs.TabPane
@@ -304,6 +325,7 @@ class Topo extends PureComponent {
             }
 
         return (
+            
             <div  style={{ height: '100%', background: '#fff' }}>
                 <div>
                     <Button size= 'small' style={{ margin: '10px'}}>网段</Button>
