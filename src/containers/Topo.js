@@ -158,7 +158,7 @@ class Topo extends PureComponent {
                     smooth: false
                 },
                 physics:{
-                    barnesHut:{gravitationalConstant:-3000},
+                    barnesHut:{gravitationalConstant:-1500},
                     stabilization: {iterations:2500}
                   },
                 groups: {
@@ -306,7 +306,9 @@ class Topo extends PureComponent {
         return (
             <div  style={{ height: '100%', background: '#fff' }}>
                 <div>
-                    <Button size= 'small' style={{ margin: '10px'}}>Primary</Button>
+                    <Button size= 'small' style={{ margin: '10px'}}>网段</Button>
+                    <Button size= 'small' >威胁程度</Button>
+                    <Button size= 'small' style={{ margin: '10px'}}>资产权重</Button>
                 </div>
                 <div id="topo" style={{ height: '100%'}}>
 
