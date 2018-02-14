@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getConfig, exitConfig } from '../actions'
 import { Table, Icon, Modal } from 'antd'
 import { Tabs } from 'antd'
+import { Button } from 'antd';
 import _ from 'lodash'
 import css from './Table.scss'
 
@@ -29,31 +30,55 @@ class Topo extends PureComponent {
                               '</svg>';
                   
                     return "data:image/svg+xml;charset=utf-8,"+ encodeURIComponent(svg); 
-                  }
+                }
 
-                  function getOSIcon (osType){
+                function getOSIcon (osType){
                     
-                            if (osType.toLowerCase().indexOf('windows') >= 0) {
-                                return '\uf17a';
-                            } else if (osType.toLowerCase().indexOf('mac') >= 0) {
-                                return '\uf179';
-                            } else if (osType.toLowerCase().indexOf('linux') >= 0  ||  osType.toLowerCase().indexOf('ubuntu') >= 0) {
-                                return '\uf17c';
-                            } else {
-                                return '\uf26c'
-                            }
-                    
-                    
+                    if (osType.toLowerCase().indexOf('windows') >= 0) {
+                        return '\uf17a';
+                    } else if (osType.toLowerCase().indexOf('mac') >= 0) {
+                        return '\uf179';
+                    } else if (osType.toLowerCase().indexOf('linux') >= 0  ||  osType.toLowerCase().indexOf('ubuntu') >= 0) {
+                        return '\uf17c';
+                    } else {
+                        return '\uf26c'
+                    }                  
                             //TODO other os
+                }
+
+                function getSubNets (graphData){
+
+                    function removeDuplicates(arr){
+                        let unique_array = []
+                        for(let i = 0;i < arr.length; i++){
+                            if(unique_array.indexOf(arr[i]) == -1){
+                                unique_array.push(arr[i])
+                            }
                         }
+                        return unique_array
+                    }
 
+                    var subnetArray = []
+                    for (var i = 0; i < graphData.length; i++){
 
+                        var ip = graphData[i].ip                    
+                        var ipArray = ip.split(".")
+                        var subnetC = ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2]
+                        
+                        subnetArray.push(subnetC)
+                    }
 
+                    var unique_subnetArray = removeDuplicates(subnetArray)
+                    return unique_subnetArray
+                }
+
+                var unique_subnetArray = getSubNets (graphData)
+
+                console.log('setnet array   ' + unique_subnetArray)
 
                 var ICON_DIR = '../img/icons/'
-                var nodeLength = graphData.length
 
-                for (var i = 0; i < nodeLength; i++){
+                for (var i = 0; i < graphData.length; i++){
 
                     var vulnLow = graphData[i].vulns.low 
                     var vulnMedium = graphData[i].vulns.medium
@@ -77,17 +102,26 @@ class Topo extends PureComponent {
                     }
                     
                     var ip = graphData[i].ip
+                    var ipArray = ip.split(".")
+                    var subnetC = ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2]
+
+                    var group = unique_subnetArray.indexOf(subnetC)
+
+                    console.log('ip and group  is   ' + ip + '   ' +  group)
+
                     var iconCode = getOSIcon (graphData[i].osType)
+                    var size = (Math.floor(Math.random() * 10 + 1)) * 5;
 
                     nodes.push({
                         id: ip,
                         label: ip,
+                        group: group,
                         shape: 'icon',
                         icon: {
                           face: 'FontAwesome',
-                          code: iconCode,
-                          size: 30,
-                          color: color,
+                          code: '\uf111',                               
+                          size: size, 
+                          color: color,                        
                         },
                     });
                 }
@@ -127,8 +161,27 @@ class Topo extends PureComponent {
                     barnesHut:{gravitationalConstant:-3000},
                     stabilization: {iterations:2500}
                   },
+                groups: {
+                    0: {
+                      color: '#FF9900' // orange
+                    },
+                    1: {
+                      color: "#2B7CE9" // blue
+                    },
+                    2: {
+                      color: "#5A1E5C" // purple
+                    },
+                    3: {
+                      color: "#C5000B" // red
+                    },
+                    4: {
+                      color: "#109618" // green
+                    }
+                },
+
                 layout: {
-                    randomSeed: 1,
+                    improvedLayout:true,
+                    //randomSeed: 1,
                    // hierarchical: {
                    //     direction: "LR"
                    // }
@@ -251,69 +304,72 @@ class Topo extends PureComponent {
             }
 
         return (
-     
-            <div id="topo" style={{ height: '100%', background: '#fff' }}>
+            <div  style={{ height: '100%', background: '#fff' }}>
+                <div>
+                    <Button size= 'small' style={{ margin: '10px'}}>Primary</Button>
+                </div>
+                <div id="topo" style={{ height: '100%'}}>
 
-                <Modal
-                    visible={!!config[entry]}
-                    onCancel={() => { exitConfig(entry) }}
-                    footer={null}
-                    title="设备信息"
-                    width='800px'
-                >
-                    <div>
-                        <div className="col1">
-                            <p><span>IP地址</span></p>
-                        </div>
-                        <div className="col2">
-                            <p>{hostIP}</p>
-                        </div>
+                    <Modal
+                        visible={!!config[entry]}
+                        onCancel={() => { exitConfig(entry) }}
+                        footer={null}
+                        title="设备信息"
+                        width='800px'
+                    >
+                        <div>
+                            <div className="col1">
+                                <p><span>IP地址</span></p>
+                            </div>
+                            <div className="col2">
+                                <p>{hostIP}</p>
+                            </div>
 
-                        <div className="col1">
-                            <p>权重</p>
+                            <div className="col1">
+                                <p>权重</p>
+                            </div>
+                            <div className="col2">
+                                <p></p>
+                            </div>
                         </div>
-                        <div className="col2">
-                            <p></p>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="col3">
-                                <p>操作系统</p>
+                        <div>
+                            <div className="col3">
+                                    <p>操作系统</p>
+                                </div>
+                                <div className="col4">
+                                    <p>{osInfo}</p>
+                            </div>
+                            <div className="col3">
+                                <p>管理员</p>
                             </div>
                             <div className="col4">
-                                <p>{osInfo}</p>
+                                <p></p>
+                            </div>
                         </div>
-                        <div className="col3">
-                            <p>管理员</p>
-                        </div>
-                        <div className="col4">
-                            <p></p>
-                        </div>
-                    </div>
 
-                    <Tabs defaultActiveKey="1">
-                        <TabPane tab= {tabOneTitle} key="1">
-                            <Table style={{ padding: "10px", paddingTop: "0"}}
-                                columns={columns}
-                                dataSource={appData}
-                                bordered
-                                size="small"
-                                pagination={false}
-                                //scroll={{y:850 }}  
-                                
-                            />
-                        </TabPane>
-                        <TabPane tab={tabTwoTitle} key="2">
-                                            {openPorts}
-                        </TabPane>
-                        <TabPane tab={tabThreeTitle} key="3">
-                                            Content of Tab Pane 3
-                        </TabPane>
+                        <Tabs defaultActiveKey="1">
+                            <TabPane tab= {tabOneTitle} key="1">
+                                <Table style={{ padding: "10px", paddingTop: "0"}}
+                                    columns={columns}
+                                    dataSource={appData}
+                                    bordered
+                                    size="small"
+                                    pagination={false}
+                                    //scroll={{y:850 }}  
+                                    
+                                />
+                            </TabPane>
+                            <TabPane tab={tabTwoTitle} key="2">
+                                                {openPorts}
+                            </TabPane>
+                            <TabPane tab={tabThreeTitle} key="3">
+                                                Content of Tab Pane 3
+                            </TabPane>
 
-                    </Tabs>                 
-                </Modal>
+                        </Tabs>                 
+                    </Modal>
+                </div>
             </div>
-
         )
     }
 }
