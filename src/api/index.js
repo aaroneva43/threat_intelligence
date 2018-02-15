@@ -1,6 +1,6 @@
 import utils from '../utils'
 
-const API_BASE = 'http://47.89.242.54:5000'
+const API_BASE = 'http://localhost:5000'
 
 export default {
 
