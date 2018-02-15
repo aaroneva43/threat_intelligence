@@ -123,8 +123,7 @@ class Topo extends PureComponent {
                     var subnetC = ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2]
 
                     var subnetId = unique_subnetArray.indexOf(subnetC)
-
-                    console.log('ip and group  is   ' + ip + '   ' +  subnetId)
+console.log('subnet id   ' + subnetId)
 
                     var iconCode = getOSIcon (graphData[i].osType)
                     var size = (Math.floor(Math.random() * 10 + 1)) * 5;
@@ -134,7 +133,7 @@ class Topo extends PureComponent {
                     nodes.push({
                         id: ip,
                         label: ip,
-                        subnet: subnetId,
+                        group: 'one',
                         shape: 'icon',
                         icon: {
                           face: 'FontAwesome',
@@ -181,21 +180,11 @@ class Topo extends PureComponent {
                     stabilization: {iterations:2500}
                   },
                 groups: {
-                    0: {
-                      color: '#FF9900' // orange
-                    },
-                    1: {
-                      color: "#2B7CE9" // blue
-                    },
-                    2: {
-                      color: "#5A1E5C" // purple
-                    },
-                    3: {
-                      color: "#C5000B" // red
-                    },
-                    4: {
-                      color: "#109618" // green
-                    }
+                    'one': {color:{background:'#543452'}, borderWidth:3},
+                    1: {color:{background:'blue'}, borderWidth:3},
+                    2: {color:{background:'yellow'}, borderWidth:3},
+                    3: {color:{background:'purple'}, borderWidth:3},
+                    4: {color:{background:'green'}, borderWidth:3}
                 },
 
                 layout: {
