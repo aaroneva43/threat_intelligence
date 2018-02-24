@@ -1,6 +1,6 @@
 import utils from '../utils'
 
-const API_BASE = '5000'
+const API_BASE = ':5000'
 
 export default {
 
