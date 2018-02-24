@@ -5,7 +5,7 @@ import { Table, Icon, Modal } from 'antd'
 import { Tabs } from 'antd'
 import { Button } from 'antd';
 import _ from 'lodash'
-import css from './Table.scss'
+import css from './Topo.scss'
 
 // import FontAwesome from 'fontawesome'
 
@@ -21,7 +21,7 @@ class Topo extends PureComponent {
             var edges =[];
 
 
-                function addNodes(nodes, graphData) {
+            function addNodes(nodes, graphData) {
 
                 function createImage(color) {
                     var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewPort="0 0 120 120">' +
@@ -51,15 +51,15 @@ class Topo extends PureComponent {
                     var colorIndex = Math.floor(Math.random() * 5 + 1);
 
                     if( colorIndex == 1){
-                        color = '#e95a5a'
+                        color = 'red'
                     } else if (colorIndex == 2){
-                        color = '#e9a84a'
+                        color = 'orange'
                     } else if (colorIndex == 3){
-                        color = '#efd662'
+                        color = 'yellow'
                     } else if (colorIndex == 4){
-                        color = '#294596'
+                        color = 'blue'
                     } else if (colorIndex == 5){
-                        color = '#216033'
+                        color = 'green'
                     } 
 
                     return color
@@ -102,8 +102,6 @@ class Topo extends PureComponent {
                     var vulnHigh = graphData[i].vulns.high
                     var vulnCritical = graphData[i].vulns.critical
 
-                    var routeArray =[]
-                    routeArray = graphData[i].route.split(",")
                     var color = null
 
                     if( vulnCritical > 0){
@@ -123,7 +121,7 @@ class Topo extends PureComponent {
                     var subnetC = ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2]
 
                     var subnetId = unique_subnetArray.indexOf(subnetC)
-console.log('subnet id   ' + subnetId)
+
 
                     var iconCode = getOSIcon (graphData[i].osType)
                     var size = (Math.floor(Math.random() * 10 + 1)) * 5;
@@ -139,7 +137,7 @@ console.log('subnet id   ' + subnetId)
                           face: 'FontAwesome',
                           code: '\uf111',                               
                           size: size, 
-                          color: color,                        
+                          color: color,                      
                         },
                     });
                 }
@@ -150,12 +148,54 @@ console.log('subnet id   ' + subnetId)
 
             addNodes(nodes,graphData)
 
-            edges.push({
-                from: '192.168.1.65',
-                to: '192.168.1.178',
-                length: 150,
-                width: 1
-            });
+//---------------------------------------------------
+            function createEdge(edges, graphData){
+
+function removeEmptyRoute(array){
+
+    var newArray = []
+    for (var i = 0; i < array.length; i++){
+
+        if (array[i].indexOf('*') == -1){
+
+            newArray.push(array[i])
+
+        }
+    }
+    return newArray
+
+}
+                for (var i = 0; i < graphData.length; i++){
+                    var routeArray = removeEmptyRoute(graphData[i].route.split(','))
+
+console.log('route array   ' + routeArray)                    
+                    var ip = graphData[i].ip
+
+                    if (routeArray.length > 1){
+
+                        for (var m = 0; m < routeArray.length - 1; m++){
+
+                           
+                                edges.push ({
+                                    from: routeArray[m],
+                                    to:routeArray[m + 1],
+                                    length: 100,
+                                    width: 1
+
+                                })
+                           
+                        }
+                        
+                    }
+
+                }
+
+                return edges
+            }
+
+
+//---------------------------------------------------
+            createEdge (edges, graphData)
  
 
             // create a network
@@ -188,24 +228,18 @@ console.log('subnet id   ' + subnetId)
                 },
 
                 layout: {
-                    improvedLayout:true,
-                    //randomSeed: 1,
-                   // hierarchical: {
-                   //     direction: "LR"
-                   // }
+                    randomSeed: 1,
                 },
-                interaction: {
-                    navigationButtons: true,
-                    keyboard: true
-                }
+                interaction:{hover:true},
+
             };
             var network = new vis.Network(topoContainer, data, options);
+            var popupMenu = null
 
             network.on("doubleClick", function (params) {
                 params.event = "[original event]";
                 
                 var nodeString = JSON.stringify(params, null, 4)
-
                 const entry = 'app_info/' + JSON.parse(nodeString).nodes
                 getConfig(entry)
                 me.setState({ entry })
@@ -216,7 +250,32 @@ console.log('subnet id   ' + subnetId)
             network.once('stabilized', function() {
                 var scaleOption = { data };
                 network.moveTo(scaleOption);
-            })            
+            })
+
+
+ /*           network.on("oncontext", function (params) {
+                if (popupMenu !== undefined) {
+                    popupMenu.parentNode.removeChild(popupMenu);
+                    popupMenu = undefined;
+                  }
+                if (network.getSelection().nodes.length > 0) {
+                    var nodeString2 = JSON.stringify(params, null, 4)
+                    
+                    popupMenu = document.createElement("div");
+                    popupMenu.className = 'popupMenu';
+                    popupMenu.style.left = JSON.parse(nodeString2).pointer.DOM.x + 35 +'px';
+                    popupMenu.style.top =  JSON.parse(nodeString2).pointer.DOM.y + 135 +'px';
+                    topoContainer.appendChild(popupMenu);
+                  }
+
+                params.event.preventDefault()  //prevent browser default right click event
+                params.event = "[original event]";
+                
+console.log ('context menu click    ' + JSON.parse(nodeString2).pointer.DOM.x )
+
+            });    
+            
+            */
         }
     }
 
@@ -226,6 +285,9 @@ console.log('subnet id   ' + subnetId)
     }
 
 
+    start = (network) => {
+        console.log('clicked  ' + network)        
+    }
 
     render() {
         const TabPane = Tabs.TabPane
@@ -315,11 +377,11 @@ console.log('subnet id   ' + subnetId)
 
         return (
             
-            <div  style={{ height: '100%', background: '#fff' }}>
+            <div  style={{ height: '100%', background: '#fff' ,padding: '10px',paddingBottom:'30px'}}>
                 <div>
-                    <Button size= 'small' style={{ margin: '10px'}}>网段</Button>
-                    <Button size= 'small' >威胁程度</Button>
-                    <Button size= 'small' style={{ margin: '10px'}}>资产权重</Button>
+                    <Button size= 'small' onClick={this.start}>网段</Button>
+                    <Button size= 'small' style={{marginLeft: '10px'}}>威胁程度</Button>
+                    <Button size= 'small' style={{marginLeft: '10px'}}>资产权重</Button>
                 </div>
                 <div id="topo" style={{ height: '100%'}}>
 
