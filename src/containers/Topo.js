@@ -252,12 +252,16 @@ console.log('route array   ' + routeArray)
                 network.moveTo(scaleOption);
             })
 
+            network.on('hoverNode', function(params) {
 
- /*           network.on("oncontext", function (params) {
                 if (popupMenu !== undefined) {
-                    popupMenu.parentNode.removeChild(popupMenu);
-                    popupMenu = undefined;
-                  }
+                  popupMenu.parentNode.removeChild(popupMenu);
+                  popupMenu = undefined;
+                }
+            })
+
+            network.on("oncontext", function (params) {
+
                 if (network.getSelection().nodes.length > 0) {
                     var nodeString2 = JSON.stringify(params, null, 4)
                     
@@ -266,16 +270,15 @@ console.log('route array   ' + routeArray)
                     popupMenu.style.left = JSON.parse(nodeString2).pointer.DOM.x + 35 +'px';
                     popupMenu.style.top =  JSON.parse(nodeString2).pointer.DOM.y + 135 +'px';
                     topoContainer.appendChild(popupMenu);
-                  }
+                }
 
                 params.event.preventDefault()  //prevent browser default right click event
                 params.event = "[original event]";
                 
 console.log ('context menu click    ' + JSON.parse(nodeString2).pointer.DOM.x )
 
-            });    
-            
-            */
+
+            });            
         }
     }
 
