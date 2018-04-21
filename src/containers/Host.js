@@ -269,8 +269,8 @@ class Host extends PureComponent {
                         </div>
                     }
                     size="small"
-                    scroll={{ x: 1180, y: window.innerHeight - 250}}
-                    pagination={{pageSize: 25, showTotal: (total) => { return `共 ${total} 条`; } }}
+                    scroll={{ x: 1100, y: window.innerHeight -250}}
+                    pagination={{ simple: false, showTotal: (total) => { return `共 ${total} 条`; } }}
                 />
             </div>
 

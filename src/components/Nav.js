@@ -11,6 +11,10 @@ import _ from 'lodash'
 
 import { logout } from '../actions'
 
+// import fontawesome from 'font-awesome'
+
+import fatyle from '../../node_modules/font-awesome/css/font-awesome.css'
+
 const SubMenu = Menu.SubMenu
 
 class Nav extends React.PureComponent {
@@ -23,15 +27,15 @@ class Nav extends React.PureComponent {
     getMenuIcon = (menu = '') => {
         
                 if (menu.toLowerCase().indexOf('dashboard') >= 0) {
-                    return 'fas fa-tachometer-alt fa-lg';
+                    return 'fa fa-bar-chart';
                 } else if (menu.toLowerCase().indexOf('assets') >= 0) {
-                    return 'fas fa-server fa-lg';
+                    return 'fa fa-server fa-lg';
                 } else if (menu.toLowerCase().indexOf('discovery') >= 0) {
-                    return 'fas fa-crosshairs fa-lg';
+                    return 'fa fa-crosshairs fa-lg';
                 } else if (menu.toLowerCase().indexOf('reports') >= 0) {
-                    return 'far fa-file-image fa-lg';
+                    return 'fa fa-file-o fa-lg';
                 } else if (menu.toLowerCase().indexOf('configuration') >= 0) {
-                    return 'fas fa-wrench fa-lg';
+                    return 'fa fa-cog fa-lg';
                 }
         
         
@@ -183,14 +187,14 @@ class Nav extends React.PureComponent {
 
                                 </Menu>
                             }>
-                                <a><span className="fas fa-bars fa-lg" />{menu.selectedChildText}</a>
+                                <a><span className="fa fa-bars" />{menu.selectedChildText}</a>
                             </Dropdown>
 
 
                             <Dropdown style={{ position: 'absolute', right: 0 }} overlay={
                                 <Menu>
                                     <Menu.Item key='logout' >
-                                        <span className='fas fa-sign-out-alt fa-lg'/>
+                                        <span className='fa fa-sign-out-alt fa-lg'/>
                                         <Link style={{ display: 'inline-block' }} to='/' onClick={() => { dispatch(logout()) }}>{'Logout'}</Link>
                                     </Menu.Item>
 

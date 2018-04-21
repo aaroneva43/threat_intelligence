@@ -10,10 +10,13 @@ import css from './Topo.scss'
 // import FontAwesome from 'fontawesome'
 
 class Topo extends PureComponent {
+
+    drawn = false;
+
     componentWillReceiveProps(nextProps) {
         const { graphData, getConfig } = nextProps
 
-        if (!_.isEmpty(graphData)) {
+        if (!_.isEmpty(graphData) && this.drawn === false) {
             const me = this
             
             // Create a data table with nodes.
@@ -227,7 +230,9 @@ class Topo extends PureComponent {
 console.log ('context menu click    ' + JSON.parse(nodeString2).pointer.DOM.x )
 
 
-            });            
+            });    
+            
+            this.drawn = true;
         }
     }
 

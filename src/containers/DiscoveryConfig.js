@@ -128,7 +128,7 @@ class DiscoveryConfig extends PureComponent {
                     bordered
                     dataSource={data}
                     size="small"
-                    //scroll={{ x: 600 }}
+                    scroll={{ x:1100, y: 1600 }}
                     pagination={{ hideOnSinglePage: true }}
                 />
 

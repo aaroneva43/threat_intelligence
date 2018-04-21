@@ -68,7 +68,8 @@
     "superagent": "^3.6.1",
     "sweetalert-react": "^0.4.10",
     "underscore": "^1.8.3",
-    "underscore.string": "^3.3.4"
+    "underscore.string": "^3.3.4",
+    "font-awesome": "4.7.0"
   },
   "scripts": {
     "dev": "webpack -d --progress --watch --profile --json > compilation-stats.json --env.dev",
