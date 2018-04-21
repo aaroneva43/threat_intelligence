@@ -17,192 +17,141 @@ class Topo extends PureComponent {
             const me = this
             
             // Create a data table with nodes.
-            var nodes = [];
-            var edges =[];
+            var router_nodes = [];
+            var host_nodes =[];
+            var network_edges = [];
+            var subnet_edges = [];
+            var host_array = [];
 
+            function getOSIcon (osType){
+                
+                if (osType.toLowerCase().indexOf('windows') >= 0) {
+                    return '\uf17a';
+                } else if (osType.toLowerCase().indexOf('mac') >= 0) {
+                    return '\uf179';
+                } else if (osType.toLowerCase().indexOf('linux') >= 0  ||  osType.toLowerCase().indexOf('ubuntu') >= 0) {
+                    return '\uf17c';
+                } else {
+                    return '\uf108'
+                }                  
+                        //TODO other os
+            }
 
-            function addNodes(nodes, graphData) {
+            function getColor (){
+                var color = ''
+                var colorIndex = Math.floor(Math.random() * 5 + 1);
+                
+                if( colorIndex == 1){
+                    color = 'red'
+                } else if (colorIndex == 2){
+                    color = 'orange'
+                } else if (colorIndex == 3){
+                    color = 'yellow'
+                } else if (colorIndex == 4){
+                    color = 'blue'
+                } else if (colorIndex == 5){
+                    color = 'green'
+                } 
+                
+                return color
+            } 
+                      
 
-                function createImage(color) {
-                    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewPort="0 0 120 120">' +
-                              '<ellipse ry="50" rx="50" cy="60" cx="60" style="fill:'+color+';fill-opacity:0.4;stroke:'+color+';stroke-width:2;stroke-opacity:1" />' +
-                              '<text x="30" y="80" style="font-size:60px;fill:#000000;">&#128423;</text>' +
-                              '</svg>';
-                  
-                    return "data:image/svg+xml;charset=utf-8,"+ encodeURIComponent(svg); 
+            function draw_network(graphData) {
+
+                for (var i = 0; i < graphData.length; i++){
+
+                    if (graphData[i].host_or_router == 2){
+                        var ip = graphData[i].ip
+                        router_nodes.push({
+                            id: ip,
+                            label: ip,
+                            group: 'one',
+                            shape: 'icon',
+                            icon: {
+                            face: 'FontAwesome',
+                            code: '\uf192',                              
+                            size: 20, 
+                            color: '#3d4085',                      
+                            },
+                        });
+
+                        var next_hops = graphData[i].next_hops
+                        for (var j = 0; j < next_hops.length; j++){
+                            network_edges.push ({
+                                from: ip,
+                                to:next_hops[j],
+                                width: 0.15,
+                                length: 200,
+                                width: 1
+                            })
+                       }
+                    } else if (graphData[i].host_or_router == 1){
+                        var host_record = []
+                            host_record[0]= graphData[i].ip
+                            host_record[1]= graphData[i].osType
+                        host_array.push(host_record);
+                    }
                 }
+            }
 
-                function getOSIcon (osType){
+            function draw_subnet(graphData){
+
+                for(var i = 0; i < graphData.length; i++){
+                    var subnet = graphData[i].subnet
+                    var icon_code
                     
-                    if (osType.toLowerCase().indexOf('windows') >= 0) {
-                        return '\uf17a';
-                    } else if (osType.toLowerCase().indexOf('mac') >= 0) {
-                        return '\uf179';
-                    } else if (osType.toLowerCase().indexOf('linux') >= 0  ||  osType.toLowerCase().indexOf('ubuntu') >= 0) {
-                        return '\uf17c';
-                    } else {
-                        return '\uf26c'
-                    }                  
-                            //TODO other os
-                }
+                 
+                    var numberOfHostsInSubnet = subnet.length
+                    if (numberOfHostsInSubnet > 0){                         
+                        for (var j = 0; j < numberOfHostsInSubnet; j++){
+                            for(var k = 0; k < host_array.length; k++){
+                                if ( subnet[j] == host_array[k][0]){
+                                    icon_code  = getOSIcon (host_array[k][1]) 
+                                    
+                                }
 
-                function getColor (){
-
-                    var colorIndex = Math.floor(Math.random() * 5 + 1);
-
-                    if( colorIndex == 1){
-                        color = 'red'
-                    } else if (colorIndex == 2){
-                        color = 'orange'
-                    } else if (colorIndex == 3){
-                        color = 'yellow'
-                    } else if (colorIndex == 4){
-                        color = 'blue'
-                    } else if (colorIndex == 5){
-                        color = 'green'
-                    } 
-
-                    return color
-                }
-
-                function getSubNets (graphData){
-
-                    function removeDuplicates(arr){
-                        let unique_array = []
-                        for(let i = 0;i < arr.length; i++){
-                            if(unique_array.indexOf(arr[i]) == -1){
-                                unique_array.push(arr[i])
                             }
-                        }
-                        return unique_array
+
+
+                            var node_color = getColor()
+                            var size = (Math.floor(Math.random() * 5 + 1)) * 5;
+                            host_nodes.push({
+                                id: subnet[j],
+ //                               label: subnet[j],
+                                group: 'one',
+                                shape: 'icon',
+                                icon: {
+                                face: 'FontAwesome',
+                                code: icon_code,                              
+                                size: size, 
+                                color: node_color,                      
+                                },
+                            });
+                            subnet_edges.push ({
+                                width: 0.15,
+                                from: graphData[i].ip,
+                                to:subnet[j],
+                                length: 100,
+                                width: 1
+                            })
+                        }                       
                     }
-
-                    var subnetArray = []
-                    for (var i = 0; i < graphData.length; i++){
-
-                        var ip = graphData[i].ip                    
-                        var ipArray = ip.split(".")
-                        var subnetC = ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2]
-                        
-                        subnetArray.push(subnetC)
-                    }
-
-                    var unique_subnetArray = removeDuplicates(subnetArray)
-                    return unique_subnetArray
                 }
+           }
 
-                var unique_subnetArray = getSubNets (graphData)
+            draw_network(graphData)
+            draw_subnet(graphData)
 
-                var ICON_DIR = '../img/icons/'
+            var all_nodes = router_nodes.concat(host_nodes)
+            var all_edges = network_edges.concat(subnet_edges)
 
-                for (var i = 0; i < graphData.length; i++){
-
-                    var vulnLow = graphData[i].vulns.low 
-                    var vulnMedium = graphData[i].vulns.medium
-                    var vulnHigh = graphData[i].vulns.high
-                    var vulnCritical = graphData[i].vulns.critical
-
-                    var color = null
-
-                    if( vulnCritical > 0){
-                        color = '#e95a5a'
-                    } else if (vulnCritical == 0 && vulnHigh > 0){
-                        color = '#e9a84a'
-                    } else if (vulnCritical == 0 && vulnHigh == 0 && vulnMedium > 0){
-                        color = '#efd662'
-                    } else if (vulnCritical == 0 && vulnHigh == 0 && vulnMedium == 0 && vulnLow > 0){
-                        color = '#294596'
-                    } else {
-                        color = '#216033'
-                    }
-                    
-                    var ip = graphData[i].ip
-                    var ipArray = ip.split(".")
-                    var subnetC = ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2]
-
-                    var subnetId = unique_subnetArray.indexOf(subnetC)
-
-
-                    var iconCode = getOSIcon (graphData[i].osType)
-                    var size = (Math.floor(Math.random() * 10 + 1)) * 5;
-
-                    color = getColor()
-
-                    nodes.push({
-                        id: ip,
-                        label: ip,
-                        group: 'one',
-                        shape: 'icon',
-                        icon: {
-                          face: 'FontAwesome',
-                          code: '\uf111',                               
-                          size: size, 
-                          color: color,                      
-                        },
-                    });
-                }
-
-                return nodes;
-
-            }
-
-            addNodes(nodes,graphData)
-
-//---------------------------------------------------
-            function createEdge(edges, graphData){
-
-function removeEmptyRoute(array){
-
-    var newArray = []
-    for (var i = 0; i < array.length; i++){
-
-        if (array[i].indexOf('*') == -1){
-
-            newArray.push(array[i])
-
-        }
-    }
-    return newArray
-
-}
-                for (var i = 0; i < graphData.length; i++){
-                    var routeArray = removeEmptyRoute(graphData[i].route.split(','))
-
-console.log('route array   ' + routeArray)                    
-                    var ip = graphData[i].ip
-
-                    if (routeArray.length > 1){
-
-                        for (var m = 0; m < routeArray.length - 1; m++){
-
-                           
-                                edges.push ({
-                                    from: routeArray[m],
-                                    to:routeArray[m + 1],
-                                    length: 100,
-                                    width: 1
-
-                                })
-                           
-                        }
-                        
-                    }
-
-                }
-
-                return edges
-            }
-
-
-//---------------------------------------------------
-            createEdge (edges, graphData)
- 
 
             // create a network
             var topoContainer = document.getElementById('topo');
             var data = {
-                nodes: nodes,
-                edges: edges
+                nodes: all_nodes,
+                edges: all_edges
             };
             var options = {
                 nodes: {
